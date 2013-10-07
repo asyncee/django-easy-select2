@@ -1,8 +1,8 @@
 Select2 widget for django admin
 ===============================
 
-This is simple django application that bring select2 widget to select inputs
-int admin.
+This is simple django application that brings select2 widget to select inputs
+in admin.
 
 Install
 -------
@@ -18,12 +18,12 @@ Configuration
 `django-easy-select2` bundles jquery and select2 static files. You can use them,
 or specify your own files to include in widget.
 
-To use bundled static, just install application.
+To use bundled static, just install an application.
 
 To use your custom static files, you can specify next settings in your
 settings.py:
 
-- `SELECT2_JS` = path to `select2.js` file. Specify path without _static_
+- `SELECT2_JS` - path to `select2.js` file. Specify path without static
   directory, because full URL will be interpolated using `static` function
   from `staticfiles` application.
   Default is: `easy_select2/vendor/select2/select2.min.js`
@@ -40,16 +40,12 @@ Usage
 There are `Select2` widget class. You can use it on any form field, as usual
 django widget::
 
-    .. code:
-
     class Form(forms.Form):
         field = forms.ModelChoiceField(queryset=qs, widget=Select2())
 
 If you want to use it on all form fields automatically, without specifying
 easy field, you can create your `ModelForm` class with `Meta` class
 constructed by custom `Meta` factory::
-
-    .. code:
 
     from easy_select2 import select2_meta_factory
 
@@ -64,13 +60,10 @@ dictionary, containing all selectable fields on model.
 If you are lazy, you can use `ModelForm` factory to build ready-to-use
 ModelForm for model::
 
-    .. code:
-
     from easy_select2 import select2_modelform
 
 
     MyModelForm = select2_modelform(MyModel)
-
 
 MyModelForm is an instance of ModelForm with `model` attribute set to `MyModel`,
 and appropriate `Meta` class.
