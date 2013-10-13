@@ -22,12 +22,14 @@ for dirpath, dirnames, filenames in os.walk('easy_select2'):
 
 setup(
     name = "django-easy-select2",
-    version = "1.0.0",
+    version = "1.0.2",
     packages = find_packages(),
     author = "asyncee",
     description = "Django select2 theme for select input widgets.",
+    long_description=open('README.rst', 'rt').read(),
     license = "MIT",
     keywords = "django select2",
+    url = 'https://github.com/asyncee/django-easy-select2',
 
     package_dir={'easy_select2': 'easy_select2'},
     package_data={'easy_select2': data_files},
