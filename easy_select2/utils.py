@@ -45,7 +45,7 @@ def select2_modelform(model, attrs=None):
     .. code:
 
         class SomeModelForm(forms.ModelForm):
-            Meta = select2_meta_factory(models.SomeModelForm)
+            Meta = select2_modelform_meta(models.SomeModelForm)
 
     Attrs argument is select2 widget attributes (width, for example).
     """
