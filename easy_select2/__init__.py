@@ -1,4 +1,7 @@
-__all__ = ['select2_meta_factory', 'select2_modelform', 'Select2']
+__all__ = [
+    'select2_meta_factory', 'select2_modelform_meta', 'select2_modelform',
+    'Select2', 'Select2Multiple', 'Select2Mixin', 'apply_select2',
+]
 
-from admin import select2_meta_factory, select2_modelform
-from widgets import Select2
+from utils import select2_meta_factory, select2_modelform_meta, select2_modelform
+from widgets import Select2Mixin, Select2, Select2Multiple
