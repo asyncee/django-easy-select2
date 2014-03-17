@@ -11,6 +11,7 @@ SELECT2_CSS = getattr(settings, 'SELECT2_CSS',
 SELECT2_USE_BUNDLED_JQUERY = getattr(settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
 
 SELECT2_WIDGET_JS = [
+    static('easy_select2/js/easy_select2.js'),
     static(SELECT2_JS),
 ]
 
