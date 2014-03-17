@@ -133,3 +133,11 @@ Usage, for example::
 
 So, ``apply_select2(forms.Select)`` will return new class, named
 Select2Select, mixed with Select2Mixin.
+
+
+Changelog
+~~~~~~~~~
+
+Version 1.1.1
++++++++++++++
+- issue#1 fix (django-admin-sortable compatibility), thanks to @mkoistinen
