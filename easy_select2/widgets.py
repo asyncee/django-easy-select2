@@ -21,13 +21,13 @@ if SELECT2_USE_BUNDLED_JQUERY:
 class Select2Mixin(object):
     """Select widget themed with select2.js."""
 
-    def __init__(self, select2attrs=None, *args, **kwargs):
-        """Sets select2 attributes, width is 250px by default."""
-        self.INLINE_SCRIPT = u"""
+    inline_script = u"""
 <script>
     $("#%(id)s").select2(%(options)s);
 </script>
 """
+    def __init__(self, select2attrs=None, *args, **kwargs):
+        """Sets select2 attributes, width is 250px by default."""
         self.select2attrs = select2attrs or {}
         if not 'width' in self.select2attrs:
             self.select2attrs.update({'width': '250px'})
@@ -37,7 +37,7 @@ class Select2Mixin(object):
         """Renders widget with additional javascript inline."""
         output = super(Select2Mixin, self).render(*args, **kwargs)
         id_ = kwargs['attrs']['id']
-        output += self.INLINE_SCRIPT % {
+        output += self.inline_script % {
             'id': id_,
             'options': unicode(self.select2attrs),
         }
@@ -65,7 +65,7 @@ class Select2TextMixin(Select2Mixin):
     def __init__(self, select2attrs=None, *args, **kwargs):
         super(Select2TextMixin, self).__init__(select2attrs, *args, **kwargs)
         if 'data' in self.select2attrs:
-            self.INLINE_SCRIPT = u"""
+            self.inline_script = u"""
 <script>
     (function(){
         var options = %(options)s;
