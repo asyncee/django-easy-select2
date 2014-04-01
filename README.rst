@@ -63,8 +63,12 @@ Thats all. All your choice widgets are select2 widgets 250px wide.
 Usage
 ~~~~~
 
-There are ``Select2`` and ``Select2Multiple`` widget classes.
-You can use them on any form field, as usual django widget::
+There are ``Select2`` and ``Select2Multiple`` widget classes for
+choice fields and ``Select2TextInput`` for non-choice fields which
+can prodive a list of pre-set choices, or can accept arbitrary input.
+
+You can use ``Select2`` and ``Select2Multiple`` on any form field,
+as usual django widget::
 
     class Form(forms.Form):
         field = forms.ModelChoiceField(queryset=qs, widget=Select2())
@@ -88,6 +92,24 @@ or::
 ``Select2Mixin`` is a simple widget mixin with predefined ``Media``
 class and custom render method, which applies `$.fn.select2()`
 method on html input.
+
+To use ``Select2TextInput`` do NOT set a choices attribute on the
+model field, but DO supply a 'data' attribute to select2attrs that
+contains a list of dictionaries each having at least an `id` and
+`text` terms like so::
+
+      form.fields['myfield'].widget = Select2TextInput(
+          select2attrs={
+              'data': [ {'id': 'your data', 'text': 'your data'}, ... ],
+          },
+      )
+
+Select2TextInput will be rendered as combo-box widget that can
+accept arbitrary input, but also has some default choices for user.
+
+Note, that ``select2attrs`` can accept not only dicts, but also strings
+or any other objects that can be converted to unicode with unicode()
+builtin.
 
 If you want to use it with all form fields automatically, without
 specifying each field, you can create your ``ModelForm`` class with
@@ -137,6 +159,10 @@ Select2Select, mixed with Select2Mixin.
 
 Changelog
 ~~~~~~~~~
+
+Version 1.2.0
++++++++++++++
+- added Select2TextInput, thanks to @mkoistinen
 
 Version 1.1.1
 +++++++++++++
