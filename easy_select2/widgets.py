@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from django.templatetags.static import static
 from django.conf import settings
@@ -38,9 +40,15 @@ class Select2Mixin(object):
         """Renders widget with additional javascript inline."""
         output = super(Select2Mixin, self).render(*args, **kwargs)
         id_ = kwargs['attrs']['id']
+
+        if isinstance(self.select2attrs, basestring):
+            options = unicode(self.select2attrs)
+        else:
+            options = json.dumps(self.select2attrs)
+
         output += self.inline_script % {
             'id': id_,
-            'options': unicode(self.select2attrs),
+            'options': options,
         }
         return mark_safe(output)
 
