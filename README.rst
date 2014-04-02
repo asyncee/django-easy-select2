@@ -160,6 +160,10 @@ Select2Select, mixed with Select2Mixin.
 Changelog
 ~~~~~~~~~
 
+Version 1.2.1
++++++++++++++
+- Extended package-level imports with Select2TextInput
+
 Version 1.2.0
 +++++++++++++
 - added Select2TextInput, thanks to @mkoistinen
