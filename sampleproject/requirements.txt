@@ -1,0 +1,4 @@
+django==1.6
+south
+
+django-easy-select2
