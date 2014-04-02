@@ -9,20 +9,23 @@ How it looks
 
 Select2 single-valued choice field (ForeignKeyField, for example):
 
-.. image:: https://raw.githubusercontent.com/asyncee/django-easy-select2/master/screenshots/select2_single.png
+.. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_single.png
+    :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_single.png
 
 Select2 multiple-valued choice field (ManyToManyField):
 
-.. image:: https://raw.githubusercontent.com/asyncee/django-easy-select2/master/screenshots/select2_multiple.png
+.. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_multiple.png
+    :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_multiple.png
 
 Select2 text input with some choices:
 
-.. image:: https://raw.githubusercontent.com/asyncee/django-easy-select2/master/screenshots/select2_text_input_choices.png
+.. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input_choices.png
+    :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input_choices.png
 
 Same input with "custom markup type" value:
 
-.. image:: https://raw.githubusercontent.com/asyncee/django-easy-select2/master/screenshots/select2_text_input_new_choice.png
-
+.. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input_new_choice.png
+    :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input_new_choice.png
 
 Installation
 ~~~~~~~~~~~~
@@ -188,6 +191,7 @@ Changelog
 Version 1.2.2
 +++++++++++++
 - Rendering select2attrs as unicode or json based on type
+
 Now, if select2attrs is instance of basestring (str or unicode),
 it will be casted to unicode, else it will be turned to json string.
 
