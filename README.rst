@@ -4,6 +4,25 @@ Select2 widget for django admin
 This is django application that brings select2 widget to select inputs
 in admin.
 
+How it looks
+~~~~~~~~~~~~
+
+Select2 single-valued choice field (ForeignKeyField, for example):
+
+.. image:: https://raw.githubusercontent.com/asyncee/django-easy-select2/master/screenshots/select2_single.png
+
+Select2 multiple-valued choice field (ManyToManyField):
+
+.. image:: https://raw.githubusercontent.com/asyncee/django-easy-select2/master/screenshots/select2_multiple.png
+
+Select2 text input with some choices:
+
+.. image:: https://raw.githubusercontent.com/asyncee/django-easy-select2/master/screenshots/select2_text_input_choices.png
+
+Same input with "custom markup type" value:
+
+.. image:: https://raw.githubusercontent.com/asyncee/django-easy-select2/master/screenshots/select2_text_input_new_choice.png
+
 
 Installation
 ~~~~~~~~~~~~
