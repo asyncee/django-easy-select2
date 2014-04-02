@@ -157,6 +157,12 @@ So, ``apply_select2(forms.Select)`` will return new class, named
 Select2Select, mixed with Select2Mixin.
 
 
+Sample project
+~~~~~~~~~~~~~~
+You can bootstrap sample project with demo application by following
+sampleproject/README.rst.
+
+
 Changelog
 ~~~~~~~~~
 
