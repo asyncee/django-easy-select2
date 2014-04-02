@@ -2,3 +2,13 @@
 dist
 build
 *.egg-info
+
+*.log
+*.pid
+
+/sampleproject/bin
+/sampleproject/lib
+/sampleproject/share
+/sampleproject/env
+
+/sampleproject/*.sqlite3
