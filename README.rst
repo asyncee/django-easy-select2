@@ -54,7 +54,7 @@ In your admin.py::
     PollForm = select2_modelform(Poll, attrs={'width': '250px'})
 
     class PollAdmin(admin.ModelAdmin):
-        form = PollAdmin
+        form = PollForm
 
 
 Thats all. All your choice widgets are select2 widgets 250px wide.
