@@ -7,8 +7,8 @@ Sample project useful for testing django applications and other utility needs.
 Installation
 ------------
 
-1. git clone https://github.com/asyncee/sampleproject.git
-2. cd sampleproject
+1. git clone https://github.com/asyncee/django-easy-select2.git
+2. cd django-easy-select2/sampleproject
 3. ./bootstrap.sh - creates virtualenv and installs django (from requirements.txt)
 4. source env/bin/activate
 5. ./manage.py syncdb --migrate
@@ -32,5 +32,5 @@ Project ships with sane defaults (settings are pretty verbose):
 Usage
 -----
 
-After you bootstrapped a project, install your application to start writing
-sphinx documentation or tests :)
+After you bootstrapped a project, you can fill it with some data and play with
+Note model admin.
