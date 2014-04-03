@@ -7,25 +7,25 @@ in admin.
 How it looks
 ~~~~~~~~~~~~
 
-Select2 single-valued choice field (ForeignKeyField, for example):
+Select one of existing values with single-valued choice field
+(ForeignKeyField, for example):
 
 .. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_single.png
     :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_single.png
 
-Select2 multiple-valued choice field (ManyToManyField):
+Easily select 1 or more "categories" for your project, you can also
+add a new one in the normal, Django-Admin manner by using the green + button
+with multiple-valued choice field (ManyToManyField):
 
 .. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_multiple.png
     :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_multiple.png
 
-Select2 text input with some choices:
+Don't see the "mood" you want? No problem, just type in a new one.
+It will be there as a choice for the next time too (text input).
 
-.. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input_choices.png
-    :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input_choices.png
+.. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input.png
+    :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input.png
 
-Same input with "custom markup type" value:
-
-.. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input_new_choice.png
-    :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input_new_choice.png
 
 Installation
 ~~~~~~~~~~~~
