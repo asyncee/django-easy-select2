@@ -8,50 +8,40 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Tag'
-        db.create_table(u'demoapp_tag', (
+        # Adding model 'Category'
+        db.create_table(u'demoapp_category', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
         ))
-        db.send_create_signal(u'demoapp', ['Tag'])
-
-        # Adding model 'MarkupType'
-        db.create_table(u'demoapp_markuptype', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('text', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal(u'demoapp', ['MarkupType'])
+        db.send_create_signal(u'demoapp', ['Category'])
 
         # Adding model 'Note'
         db.create_table(u'demoapp_note', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('markup', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True, blank=True)),
+            ('mood', self.gf('django.db.models.fields.CharField')(default='', max_length=64)),
         ))
         db.send_create_signal(u'demoapp', ['Note'])
 
-        # Adding M2M table for field tags on 'Note'
-        m2m_table_name = db.shorten_name(u'demoapp_note_tags')
+        # Adding M2M table for field categories on 'Note'
+        m2m_table_name = db.shorten_name(u'demoapp_note_categories')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('note', models.ForeignKey(orm[u'demoapp.note'], null=False)),
-            ('tag', models.ForeignKey(orm[u'demoapp.tag'], null=False))
+            ('category', models.ForeignKey(orm[u'demoapp.category'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['note_id', 'tag_id'])
+        db.create_unique(m2m_table_name, ['note_id', 'category_id'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Tag'
-        db.delete_table(u'demoapp_tag')
-
-        # Deleting model 'MarkupType'
-        db.delete_table(u'demoapp_markuptype')
+        # Deleting model 'Category'
+        db.delete_table(u'demoapp_category')
 
         # Deleting model 'Note'
         db.delete_table(u'demoapp_note')
 
-        # Removing M2M table for field tags on 'Note'
-        db.delete_table(db.shorten_name(u'demoapp_note_tags'))
+        # Removing M2M table for field categories on 'Note'
+        db.delete_table(db.shorten_name(u'demoapp_note_categories'))
 
 
     models = {
@@ -91,22 +81,17 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'demoapp.markuptype': {
-            'Meta': {'object_name': 'MarkupType'},
+        u'demoapp.category': {
+            'Meta': {'object_name': 'Category'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
         u'demoapp.note': {
             'Meta': {'object_name': 'Note'},
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['demoapp.Category']", 'symmetrical': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'markup': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True', 'blank': 'True'}),
-            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['demoapp.Tag']", 'symmetrical': 'False'}),
+            'mood': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '64'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
-        },
-        u'demoapp.tag': {
-            'Meta': {'object_name': 'Tag'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         }
     }
 
