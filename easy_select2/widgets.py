@@ -22,22 +22,40 @@ if SELECT2_USE_BUNDLED_JQUERY:
 
 
 class Select2Mixin(object):
-    """Select widget themed with select2.js."""
+    """
+    This mixin provides a mechanism to construct custom widget
+    class, that will be rendered using Select2 input.
+
+    Generally should be mixed with widgets that render select input.
+    """
 
     inline_script = u"""
-<script>
-    $("#%(id)s").select2(%(options)s);
-</script>
-"""
+        <script>
+            $("#%(id)s").select2(%(options)s);
+        </script>
+    """
+
     def __init__(self, select2attrs=None, *args, **kwargs):
-        """Sets select2 attributes, width is 250px by default."""
+        """
+        Initializes default select2 attributes.
+
+        If width is not provided, sets Select2 width to 250px.
+
+        Args:
+            select2attrs: a dictionary or string, which then
+                converted to unicode string representation and
+                passed to Select2 constructor function as options.
+        """
         self.select2attrs = select2attrs or {}
         if not 'width' in self.select2attrs:
             self.select2attrs.update({'width': '250px'})
         super(Select2Mixin, self).__init__(*args, **kwargs)
 
     def render(self, *args, **kwargs):
-        """Renders widget with additional javascript inline."""
+        """
+        Extends base class's `render` method by appending
+        javascript inline text to html output.
+        """
         output = super(Select2Mixin, self).render(*args, **kwargs)
         id_ = kwargs['attrs']['id']
 
@@ -60,43 +78,57 @@ class Select2Mixin(object):
             ],
         }
 
-class Select2Multiple(Select2Mixin, forms.SelectMultiple):
+
+class Select2(Select2Mixin, forms.Select):
+    """Implements single-valued select widget with Select2."""
     pass
 
 
-class Select2(Select2Mixin, forms.Select):
+class Select2Multiple(Select2Mixin, forms.SelectMultiple):
+    """Implements multiple select widget with Select2."""
     pass
 
 
 class Select2TextMixin(Select2Mixin):
-    """TextInput widget themed with select2.js."""
+    """
+    This mixin provides a mechanism to construct custom widget
+    class, that will be rendered using Select2.
+
+    It will work as :class:`Select2Mixin` if there is no *data* attribute
+    in `select2attrs`.
+    If *data* attribute is passed, Select2 will be configured to
+    use pre-set list of choices.
+
+    Generally should be mixed with widgets, that renders as text
+    input.
+    """
 
     def __init__(self, select2attrs=None, *args, **kwargs):
         super(Select2TextMixin, self).__init__(select2attrs, *args, **kwargs)
         if 'data' in self.select2attrs:
             self.inline_script = u"""
-<script>
-    (function(){
-        var options = %(options)s;
-        options['createSearchChoice'] = function(term){
-            return { 'id': term, 'text': term };
-        };
-        $("#%(id)s").select2(options);
-    }());
-</script>
-"""
+                <script>
+                    (function(){
+                        var options = %(options)s;
+                        options['createSearchChoice'] = function(term){
+                            return { 'id': term, 'text': term };
+                        };
+                        $("#%(id)s").select2(options);
+                    }());
+                </script>
+            """
 
 
 class Select2TextInput(Select2TextMixin, forms.TextInput):
+    """
+    A Select2-enabled combo box for non-choice fields which can
+    provide a list of pre-set choices, or can accept arbitrary input.
 
-    """A Select2-enabled combo box for non-choice fields which can provide a
-    list of pre-set choices, or can accept arbitrary input.
+    To use this, do NOT set a *choices* attribute on the model field,
+    but DO supply a *data* attribute to select2attrs that contains a
+    list of dictionaries each having at least an *id* and *text*
+    terms like so::
 
-    
-    To use this, do NOT set a choices attribute on the model field, but DO
-    supply a 'data' attribute to select2attrs that contains a list of
-    dictionaries each having at least an 'id' and 'text' terms like so:
-    
       form.fields['myfield'].widget = Select2TextInput(
           select2attrs={
               'data': [ {'id': 'your data', 'text': 'your data'}, ... ],

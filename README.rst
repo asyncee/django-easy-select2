@@ -44,7 +44,7 @@ Installation
 Configuration
 ~~~~~~~~~~~~~
 
-``django-easy-select2`` bundles jquery and select2 static files.
+``django-easy-select2`` bundles jQuery and Select2 static files.
 You can use them, or specify your own files to include in widget.
 
 To use bundled static, just install an application.
