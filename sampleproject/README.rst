@@ -1,4 +1,4 @@
-sampleproject
+Sampleproject
 =============
 
 Sample project useful for testing django applications and other utility needs.

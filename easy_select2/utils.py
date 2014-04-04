@@ -8,8 +8,9 @@ from widgets import Select2Mixin, Select2, Select2Multiple
 
 def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
     """
-    Returns `Meta` class with select2 widgets for fields with choices (e.g.
-    ForeignKey, CharField, etc) for use with ModelForm.
+    Returns `Meta` class with Select2-enabled widgets for fields
+    with choices (e.g.  ForeignKey, CharField, etc) for use with
+    ModelForm.
 
     Attrs argument is select2 widget attributes (width, for example).
     """
@@ -29,20 +30,18 @@ def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
     return meta
 
 
+# select2_meta_factory is deprecated name
 select2_modelform_meta = select2_meta_factory
 
 
 def select2_modelform(model, attrs=None):
     """
     Returns ModelForm class for model with select2 widgets.
-
-    .. code:
+    ::
 
         SomeModelForm = select2_modelform(models.SomeModelBanner)
 
-    is the same like
-
-    .. code:
+    is the same like::
 
         class SomeModelForm(forms.ModelForm):
             Meta = select2_modelform_meta(models.SomeModelForm)
@@ -58,15 +57,19 @@ def apply_select2(widget_cls):
     """
     Dynamically creates new widget class mixed with Select2Mixin.
 
-    Usage, for example:
+    Args:
+        widget_cls: class of source widget.
 
-    class SomeModelForm(admin.ModelForm):
-        class Meta:
-            widgets = {
-                'field': apply_select2(forms.Select),
-            }
+    Usage, for example::
 
-    So, `apply_select2(forms.Select)` will return new class, named Select2Select.
+        class SomeModelForm(admin.ModelForm):
+            class Meta:
+                widgets = {
+                    'field': apply_select2(forms.Select),
+                }
+
+    So, `apply_select2(forms.Select)` will return new class,
+    named Select2Select.
     """
     cname = 'Select2%s' % widget_cls.__name__
     return type(cname, (Select2Mixin, widget_cls), {})
