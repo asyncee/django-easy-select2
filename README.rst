@@ -43,6 +43,8 @@ In your admin.py::
 Thats all. All your choice widgets are select2 widgets 250px wide.
 
 
+Documentation
+-------------
 You can read more in the documentation_.
 
 .. _documentation: http://django-easy-select2.readthedocs.org
