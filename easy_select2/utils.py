@@ -3,7 +3,7 @@
 from django import forms
 from django.db.models import ForeignKey
 
-from widgets import Select2Mixin, Select2, Select2Multiple
+from easy_select2.widgets import Select2Mixin, Select2, Select2Multiple
 
 
 def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
