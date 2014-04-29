@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Version 1.2.3
+-------------
+- Python 3.3 support, thanks to *dzerrenner*
+
 Version 1.2.2
 -------------
 - Rendering select2attrs as unicode or json based on type
@@ -14,7 +18,7 @@ Version 1.2.1
 
 Version 1.2.0
 -------------
-- added Select2TextInput, thanks to @mkoistinen
+- added Select2TextInput, thanks to *mkoistinen*
 
 Version 1.1.1
 -------------
