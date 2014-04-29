@@ -29,7 +29,7 @@ class Select2Mixin(object):
     Generally should be mixed with widgets that render select input.
     """
 
-    inline_script = u"""
+    inline_script = """
         <script>
             $("#%(id)s").select2(%(options)s);
         </script>
@@ -59,8 +59,8 @@ class Select2Mixin(object):
         output = super(Select2Mixin, self).render(*args, **kwargs)
         id_ = kwargs['attrs']['id']
 
-        if isinstance(self.select2attrs, basestring):
-            options = unicode(self.select2attrs)
+        if isinstance(self.select2attrs, str):
+            options = self.select2attrs
         else:
             options = json.dumps(self.select2attrs)
 
@@ -106,7 +106,7 @@ class Select2TextMixin(Select2Mixin):
     def __init__(self, select2attrs=None, *args, **kwargs):
         super(Select2TextMixin, self).__init__(select2attrs, *args, **kwargs)
         if 'data' in self.select2attrs:
-            self.inline_script = u"""
+            self.inline_script = """
                 <script>
                     (function(){
                         var options = %(options)s;
