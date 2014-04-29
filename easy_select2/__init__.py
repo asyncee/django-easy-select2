@@ -4,7 +4,7 @@ __all__ = [
     'Select2TextMixin', 'Select2TextInput',
 ]
 
-from utils import (select2_meta_factory, select2_modelform_meta,
+from easy_select2.utils import (select2_meta_factory, select2_modelform_meta,
                    select2_modelform)
-from widgets import (Select2Mixin, Select2, Select2Multiple,
+from easy_select2.widgets import (Select2Mixin, Select2, Select2Multiple,
                      Select2TextMixin, Select2TextInput)
