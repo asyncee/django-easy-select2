@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version 1.2.4
+-------------
+- Fixed issue #6 "Select will not update selection after adding a new option",
+  thanks to *ismaelbej* for bug report.
+
 Version 1.2.3
 -------------
 - Python 3.3 support, thanks to *dzerrenner*
