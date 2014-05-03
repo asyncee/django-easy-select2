@@ -14,6 +14,7 @@ SELECT2_USE_BUNDLED_JQUERY = getattr(settings, 'SELECT2_USE_BUNDLED_JQUERY', Tru
 
 SELECT2_WIDGET_JS = [
     static('easy_select2/js/easy_select2.js'),
+    static('easy_select2/js/lookup_override.js'),
     static(SELECT2_JS),
 ]
 
@@ -31,7 +32,9 @@ class Select2Mixin(object):
 
     inline_script = """
         <script>
-            $("#%(id)s").select2(%(options)s);
+            $("#%(id)s").on('select2changed', function(e){
+                $("#%(id)s").select2(%(options)s);
+            }).trigger('select2changed');
         </script>
     """
 
