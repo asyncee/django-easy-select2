@@ -34,9 +34,14 @@ def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
 select2_modelform_meta = select2_meta_factory
 
 
-def select2_modelform(model, attrs=None):
+def select2_modelform(model, attrs=None, form_class=forms.ModelForm):
     """
     Returns ModelForm class for model with select2 widgets.
+
+    Arguments:
+        attrs: select2 widget attributes (width, for example).
+        form_class: modelform base class, `forms.ModelForm` by default.
+
     ::
 
         SomeModelForm = select2_modelform(models.SomeModelBanner)
@@ -45,12 +50,10 @@ def select2_modelform(model, attrs=None):
 
         class SomeModelForm(forms.ModelForm):
             Meta = select2_modelform_meta(models.SomeModelForm)
-
-    Attrs argument is select2 widget attributes (width, for example).
     """
     classname = '%sForm' % model._meta.object_name
     meta = select2_modelform_meta(model, attrs=attrs)
-    return type(classname, (forms.ModelForm,), {'Meta': meta})
+    return type(classname, (form_class,), {'Meta': meta})
 
 
 def apply_select2(widget_cls):

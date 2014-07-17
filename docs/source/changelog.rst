@@ -4,6 +4,11 @@ Changelog
 Version 1.2
 -----------
 
+1.2.6
+~~~~~
+- Extended select2_modelform function with `form_class` argument to
+  specify form base class explicitly (issue #10).
+
 1.2.5
 ~~~~~
 - Fixed issue #9 "apply_select2 not imported in __init__" thanks to *ocZio* for bug report.

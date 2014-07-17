@@ -79,6 +79,13 @@ is the same like::
     class MyModelForm(forms.ModelForm):
         Meta = select2_modelform_meta(models.SomeModelForm)
 
+You can also specify your base form class instead of default
+forms.ModelForm::
+
+    from easy_select2 import select2_modelform
+
+    MyModelForm = select2_modelform(MyModel, form_class=forms.ModelForm)
+
 MyModelForm is an instance of ModelForm with ``model`` attribute
 set to ``MyModel``, and appropriate ``Meta`` class.
 
