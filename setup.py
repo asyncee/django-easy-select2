@@ -3,13 +3,18 @@ import os
 from setuptools import setup, find_packages
 
 
+# Some initialization
+here = os.path.abspath(os.path.dirname(__file__))
+long_description = open(os.path.join(here, 'README.rst')).read()
+
+
 data_files = []
 root_dir = os.path.dirname(__file__)
 if root_dir:
     os.chdir(root_dir)
 
 
-# this for cycle took from django-registration setup.py script
+# this code snippet is taken from django-registration setup.py script
 for dirpath, dirnames, filenames in os.walk('easy_select2'):
     # Ignore dirnames that start with '.'
     for i, dirname in enumerate(dirnames):
@@ -26,7 +31,7 @@ setup(
     packages=find_packages(),
     author="asyncee",
     description="Django select2 theme for select input widgets.",
-    long_description="This is django application that brings select2 widget to select inputs in admin.",
+    long_description=long_description,
     license="MIT",
     keywords="django select2",
     url='https://github.com/asyncee/django-easy-select2',
