@@ -26,7 +26,7 @@ setup(
     packages=find_packages(),
     author="asyncee",
     description="Django select2 theme for select input widgets.",
-    long_description=open('README.rst', 'rt').read(),
+    long_description="This is django application that brings select2 widget to select inputs in admin.",
     license="MIT",
     keywords="django select2",
     url='https://github.com/asyncee/django-easy-select2',
