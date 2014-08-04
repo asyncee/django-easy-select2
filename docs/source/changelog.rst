@@ -4,6 +4,10 @@ Changelog
 Version 1.2
 -----------
 
+1.2.7
+~~~~~
+- setup.py fixes (issue #11), thanks to *JensTimmerman*.
+
 1.2.6
 ~~~~~
 - Extended select2_modelform function with `form_class` argument to
