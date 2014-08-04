@@ -43,4 +43,5 @@ setup(
 
     package_dir={'easy_select2': 'easy_select2'},
     package_data={'easy_select2': data_files},
+    zip_safe=False,
 )
