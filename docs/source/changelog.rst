@@ -4,6 +4,10 @@ Changelog
 Version 1.2
 -----------
 
+1.2.8
+~~~~~
+- fixed incorrect instructions in help_text of ManyToMany fields #2, thanks to *bashu*.
+
 1.2.7
 ~~~~~
 - setup.py fixes (issue #11), thanks to *JensTimmerman*.
