@@ -2,6 +2,7 @@
 
 from django import forms
 from django.db.models import ForeignKey
+from django.utils.translation import ugettext_lazy as _
 
 from easy_select2.widgets import Select2Mixin, Select2, Select2Multiple
 
@@ -23,6 +24,8 @@ def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
 
     for field in model._meta.many_to_many:
         widgets.update({field.name: Select2Multiple(select2attrs=attrs)})
+        msg = _('Hold down "Control", or "Command" on a Mac, to select more than one.')
+        field.help_text = field.help_text.replace(unicode(msg), '')
 
     meta_fields.update({'model': model, 'widgets': widgets})
     meta = type('Meta', (object,), meta_fields)
