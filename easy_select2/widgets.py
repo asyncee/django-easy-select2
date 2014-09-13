@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from django.templatetags.static import static
 from django.conf import settings
@@ -55,7 +57,11 @@ class Select2Mixin(object):
         """Render options for select2."""
         output = []
         for key, value in options.items():
-            output.append('data-%s="%s"' % (key, mark_safe(value)))
+            if isinstance(value, (dict, list)):
+                value = json.dumps(value)
+            output.append("data-{name}='{value}'".format(
+                name=key,
+                value=mark_safe(value)))
         return mark_safe(' '.join(output))
 
     def render_js_code(self, id_, *args, **kwargs):
