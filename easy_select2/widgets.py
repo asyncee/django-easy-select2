@@ -1,5 +1,3 @@
-import json
-
 from django import forms
 from django.templatetags.static import static
 from django.conf import settings
@@ -13,6 +11,7 @@ SELECT2_CSS = getattr(settings, 'SELECT2_CSS',
 SELECT2_USE_BUNDLED_JQUERY = getattr(settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
 
 SELECT2_WIDGET_JS = [
+    static('easy_select2/js/init.js'),
     static('easy_select2/js/easy_select2.js'),
     static('easy_select2/js/lookup_override.js'),
     static(SELECT2_JS),
@@ -29,14 +28,7 @@ class Select2Mixin(object):
 
     Generally should be mixed with widgets that render select input.
     """
-
-    inline_script = """
-        <script>
-            $("#%(id)s").on('select2changed', function(e){
-                $("#%(id)s").select2(%(options)s);
-            }).trigger('select2changed');
-        </script>
-    """
+    html = """<div class="field-easy-select2" style="display:none" id="{id}" {options}></div>"""
 
     def __init__(self, select2attrs=None, *args, **kwargs):
         """
@@ -45,14 +37,34 @@ class Select2Mixin(object):
         If width is not provided, sets Select2 width to 250px.
 
         Args:
-            select2attrs: a dictionary or string, which then
-                converted to unicode string representation and
-                passed to Select2 constructor function as options.
+            select2attrs: a dictionary, which then passed to
+                Select2 constructor function as options.
         """
         self.select2attrs = select2attrs or {}
         if not 'width' in self.select2attrs:
             self.select2attrs.update({'width': '250px'})
         super(Select2Mixin, self).__init__(*args, **kwargs)
+
+    # This functions is taken from django-select2
+    def get_options(self):
+        """Return dictionary of options to be used by Select2."""
+        return dict(self.select2attrs)
+
+    # This functions is taken from django-select2
+    def render_select2_options_code(self, options, id_):
+        """Render options for select2."""
+        output = []
+        for key, value in options.items():
+            output.append('data-%s="%s"' % (key, mark_safe(value)))
+        return mark_safe(' '.join(output))
+
+    def render_js_code(self, id_, *args, **kwargs):
+        """Render html container for Select2 widget with options."""
+        if id_:
+            options = self.render_select2_options_code(
+                dict(self.get_options()), id_)
+            return mark_safe(self.html.format(id=id_, options=options))
+        return u''
 
     def render(self, *args, **kwargs):
         """
@@ -61,16 +73,8 @@ class Select2Mixin(object):
         """
         output = super(Select2Mixin, self).render(*args, **kwargs)
         id_ = kwargs['attrs']['id']
+        output += self.render_js_code(id_, *args, **kwargs)
 
-        if isinstance(self.select2attrs, str):
-            options = self.select2attrs
-        else:
-            options = json.dumps(self.select2attrs)
-
-        output += self.inline_script % {
-            'id': id_,
-            'options': options,
-        }
         return mark_safe(output)
 
     class Media:
