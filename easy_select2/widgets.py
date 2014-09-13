@@ -118,18 +118,6 @@ class Select2TextMixin(Select2Mixin):
 
     def __init__(self, select2attrs=None, *args, **kwargs):
         super(Select2TextMixin, self).__init__(select2attrs, *args, **kwargs)
-        if 'data' in self.select2attrs:
-            self.inline_script = """
-                <script>
-                    (function(){
-                        var options = %(options)s;
-                        options['createSearchChoice'] = function(term){
-                            return { 'id': term, 'text': term };
-                        };
-                        $("#%(id)s").select2(options);
-                    }());
-                </script>
-            """
 
 
 class Select2TextInput(Select2TextMixin, forms.TextInput):
