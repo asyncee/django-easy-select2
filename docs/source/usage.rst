@@ -47,9 +47,10 @@ and :attr:`text` terms like so::
 ``Select2TextInput`` will be rendered as combo-box widget that can
 accept arbitrary input, but also has some default choices for user.
 
-Note, that :attr:`select2attrs` can accept not only dicts, but also
-strings or any other objects that can be converted to unicode with
-unicode() builtin. If dictionary is passed, it will be dumped to json.
+.. WARNING::
+
+    Since version 1.2.9 :attr:`select2attrs` should be of type `dict`
+    or AssertionError will be raised.
 
 If you want to use it with all form fields automatically, without
 specifying each field, you can create your ``ModelForm`` class with

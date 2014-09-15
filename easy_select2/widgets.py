@@ -34,7 +34,7 @@ class Select2Mixin(object):
 
     def __init__(self, select2attrs=None, *args, **kwargs):
         """
-        Initializes default select2 attributes.
+        Initialize default select2 attributes.
 
         If width is not provided, sets Select2 width to 250px.
 
@@ -43,16 +43,20 @@ class Select2Mixin(object):
                 Select2 constructor function as options.
         """
         self.select2attrs = select2attrs or {}
+        assert_msg = "select2attrs attribute must dict not {}"
+        assert isinstance(self.select2attrs, dict), assert_msg.format(
+            self.select2attrs.__class__.__name__
+        )
         if not 'width' in self.select2attrs:
             self.select2attrs.update({'width': '250px'})
         super(Select2Mixin, self).__init__(*args, **kwargs)
 
-    # This functions is taken from django-select2
+    # This function is taken from django-select2
     def get_options(self):
         """Return dictionary of options to be used by Select2."""
-        return dict(self.select2attrs)
+        return self.select2attrs
 
-    # This functions is taken from django-select2
+    # This function is taken from django-select2
     def render_select2_options_code(self, options, id_):
         """Render options for select2."""
         output = []
@@ -74,7 +78,7 @@ class Select2Mixin(object):
 
     def render(self, *args, **kwargs):
         """
-        Extends base class's `render` method by appending
+        Extend base class's `render` method by appending
         javascript inline text to html output.
         """
         output = super(Select2Mixin, self).render(*args, **kwargs)
@@ -93,12 +97,12 @@ class Select2Mixin(object):
 
 
 class Select2(Select2Mixin, forms.Select):
-    """Implements single-valued select widget with Select2."""
+    """Implement single-valued select widget with Select2."""
     pass
 
 
 class Select2Multiple(Select2Mixin, forms.SelectMultiple):
-    """Implements multiple select widget with Select2."""
+    """Implement multiple select widget with Select2."""
     pass
 
 
