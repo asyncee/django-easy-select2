@@ -9,11 +9,12 @@ from easy_select2.widgets import Select2Mixin, Select2, Select2Multiple
 
 def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
     """
-    Returns `Meta` class with Select2-enabled widgets for fields
+    Return `Meta` class with Select2-enabled widgets for fields
     with choices (e.g.  ForeignKey, CharField, etc) for use with
     ModelForm.
 
-    Attrs argument is select2 widget attributes (width, for example).
+    Attrs argument is select2 widget attributes (width, for example)
+    and must be of type `dict`.
     """
     widgets = widgets or {}
     meta_fields = meta_fields or {}
@@ -39,10 +40,10 @@ select2_modelform_meta = select2_meta_factory
 
 def select2_modelform(model, attrs=None, form_class=forms.ModelForm):
     """
-    Returns ModelForm class for model with select2 widgets.
+    Return ModelForm class for model with select2 widgets.
 
     Arguments:
-        attrs: select2 widget attributes (width, for example).
+        attrs: select2 widget attributes (width, for example) of type `dict`.
         form_class: modelform base class, `forms.ModelForm` by default.
 
     ::
@@ -61,7 +62,7 @@ def select2_modelform(model, attrs=None, form_class=forms.ModelForm):
 
 def apply_select2(widget_cls):
     """
-    Dynamically creates new widget class mixed with Select2Mixin.
+    Dynamically create new widget class mixed with Select2Mixin.
 
     Args:
         widget_cls: class of source widget.

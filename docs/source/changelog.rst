@@ -4,6 +4,16 @@ Changelog
 Version 1.2
 -----------
 
+1.2.9
+~~~~~
+- fixed issue#12 "Inline relations: "Add another <Model>" breaks dropdown boxes"
+
+.. WARNING::
+
+  Version 1.2.9 introduced backward incompatible change:
+  `select2attrs` argument of `Select2Mixin.__init__` must be of type dict
+
+
 1.2.8
 ~~~~~
 - fixed incorrect instructions in help_text of ManyToMany fields #2, thanks to *bashu*.
