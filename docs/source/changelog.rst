@@ -4,6 +4,10 @@ Changelog
 Version 1.2
 -----------
 
+1.2.10
+~~~~~~
+- fixed issue#14 - README.rst is not included in MANIFEST.in
+
 1.2.9
 ~~~~~
 - fixed issue#12 "Inline relations: "Add another <Model>" breaks dropdown boxes"
