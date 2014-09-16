@@ -1,1 +1,2 @@
+include README.rst
 recursive-include easy_select2/static *
