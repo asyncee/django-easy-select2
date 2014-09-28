@@ -4,6 +4,10 @@ This is django application that brings select2 widget to select inputs
 in admin.
 
 
+.. image:: https://travis-ci.org/asyncee/django-easy-select2.svg?branch=master
+    :target: https://travis-ci.org/asyncee/django-easy-select2
+
+
 How it looks
 ------------
 
