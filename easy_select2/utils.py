@@ -8,6 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from easy_select2.widgets import Select2Mixin, Select2, Select2Multiple
 
 
+# TODO: refactor keyword arguments
+# move attrs to **kwargs and pass **kwargs to Select2
 def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
     """
     Return `Meta` class with Select2-enabled widgets for fields
@@ -19,6 +21,8 @@ def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
     """
     widgets = widgets or {}
     meta_fields = meta_fields or {}
+
+    # TODO: assert attrs is of type `dict`
 
     for field in model._meta.fields:
         if isinstance(field, ForeignKey) or field.choices:
