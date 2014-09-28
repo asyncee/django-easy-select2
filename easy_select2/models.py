@@ -13,6 +13,7 @@ class TestFieldsModel(models.Model):
     choice_field = models.IntegerField(choices=CHOICES)
     fk_field = models.ForeignKey(Related, related_name='+')
     m2m_field = models.ManyToManyField(Related, related_name='+')
+    text = models.TextField()
 
     class Meta:
         managed = False
