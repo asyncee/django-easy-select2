@@ -19,7 +19,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # third-party apps
-    'south',
     'easy_select2',
 
     # project apps
