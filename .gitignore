@@ -13,3 +13,5 @@ build
 /sampleproject/*.sqlite3
 
 /docs/build
+
+.tox
