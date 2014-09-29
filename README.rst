@@ -4,6 +4,9 @@ in admin.
 .. image:: https://travis-ci.org/asyncee/django-easy-select2.svg?branch=master
     :target: https://travis-ci.org/asyncee/django-easy-select2
 
+.. image:: https://coveralls.io/repos/asyncee/django-easy-select2/badge.png?branch=master
+    :target: https://coveralls.io/r/asyncee/django-easy-select2?branch=master
+
 
 How it looks
 ------------
