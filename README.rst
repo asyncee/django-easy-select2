@@ -7,6 +7,30 @@ in admin.
 .. image:: https://coveralls.io/repos/asyncee/django-easy-select2/badge.png?branch=master
     :target: https://coveralls.io/r/asyncee/django-easy-select2?branch=master
 
+.. image:: https://pypip.in/download/django-easy-select2/badge.svg
+    :target: https://pypi.python.org/pypi/django-easy-select2/
+    :alt: Downloads
+
+.. image:: https://pypip.in/version/django-easy-select2/badge.svg?text=pypi
+    :target: https://pypi.python.org/pypi/django-easy-select2/
+    :alt: Latest Version
+
+.. image:: https://pypip.in/py_versions/django-easy-select2/badge.svg
+    :target: https://pypi.python.org/pypi/django-easy-select2/
+    :alt: Supported Python versions
+
+.. image:: https://pypip.in/status/django-easy-select2/badge.svg
+    :target: https://pypi.python.org/pypi/django-easy-select2/
+    :alt: Development Status
+
+.. image:: https://pypip.in/license/django-easy-select2/badge.svg
+    :target: https://pypi.python.org/pypi/django-easy-select2/
+    :alt: License
+
+
+Project aims to support *Python 2.7*, *3.3* and *3.4*,
+*Django 1.6* and *1.7*.
+
 
 How it looks
 ------------
