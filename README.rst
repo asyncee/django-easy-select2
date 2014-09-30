@@ -28,8 +28,8 @@ in admin.
     :alt: License
 
 
-Project aims to support *Python 2.7*, *3.3* and *3.4*,
-*Django 1.6* and *1.7*.
+Project aims to support **Python 2.7**, **3.3** and **3.4**,
+**Django 1.6** and **1.7**.
 
 
 How it looks
