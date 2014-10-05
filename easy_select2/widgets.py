@@ -106,6 +106,10 @@ class Select2Multiple(Select2Mixin, forms.SelectMultiple):
     pass
 
 
+# TODO: remove this class, because it duplicates Select2Mixin
+# functionality; bump version to 1.3; update docs with warning
+# about backwards compatibility.
+# Add upgrade guide 1.2->1.3 to README and intro.rst
 class Select2TextMixin(Select2Mixin):
     """
     This mixin provides a mechanism to construct custom widget
