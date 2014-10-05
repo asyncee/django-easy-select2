@@ -50,6 +50,11 @@ def test_select2mixin_render_js_code(mocked):
     assert result == expected
 
 
+def test_select2mixin_render_js_code_should_return_empty_string():
+    s = widgets.Select2Mixin()
+    assert s.render_js_code(id_=None) == u''
+
+
 class SuperWithRender(object):
     def render(self, *args, **kwargs):
         return "super"
