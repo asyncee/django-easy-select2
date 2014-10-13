@@ -8,16 +8,24 @@ from django.utils.translation import ugettext_lazy as _
 from easy_select2.widgets import Select2Mixin, Select2, Select2Multiple
 
 
-# TODO: refactor keyword arguments
-# move attrs to **kwargs and pass **kwargs to Select2
-def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
+# TODO: merge meta_fields and kwargs, which is the same.
+def select2_modelform_meta(model,
+                           meta_fields=None,
+                           widgets=None,
+                           attrs=None,
+                           **kwargs):
     """
     Return `Meta` class with Select2-enabled widgets for fields
     with choices (e.g.  ForeignKey, CharField, etc) for use with
     ModelForm.
 
-    Attrs argument is select2 widget attributes (width, for example)
-    and must be of type `dict`.
+    Arguments:
+        model - a model class to create `Meta` class for.
+        meta_fields - dictionary with `Meta` class fields, for
+            example, {'fields': ['id', 'name']}
+        attrs - select2 widget attributes (width, for example),
+            must be of type `dict`.
+        **kwargs - will be merged with meta_fields.
     """
     widgets = widgets or {}
     meta_fields = meta_fields or {}
@@ -34,14 +42,20 @@ def select2_meta_factory(model, meta_fields=None, widgets=None, attrs=None):
         msg = _('Hold down "Control", or "Command" on a Mac, to select more than one.')
         field.help_text = field.help_text.replace(force_text(msg), '')
 
-    meta_fields.update({'model': model, 'widgets': widgets})
+    meta_fields.update({
+        'model': model,
+        'widgets': widgets,
+    })
+    if not 'exclude' in kwargs and not 'fields' in kwargs:
+        meta_fields.update({'exclude': []})
+    meta_fields.update(**kwargs)
     meta = type('Meta', (object,), meta_fields)
 
     return meta
 
 
 # select2_meta_factory is deprecated name
-select2_modelform_meta = select2_meta_factory
+select2_meta_factory = select2_modelform_meta
 
 
 def select2_modelform(model, attrs=None, form_class=forms.ModelForm):

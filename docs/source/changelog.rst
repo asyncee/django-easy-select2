@@ -4,6 +4,10 @@ Changelog
 Version 1.2
 -----------
 
+1.2.11
+~~~~~~
+- fixed issue#15 - "RemovedInDjango18Warning"
+
 1.2.10
 ~~~~~~
 - fixed issue#14 - README.rst is not included in MANIFEST.in
