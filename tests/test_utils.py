@@ -15,16 +15,16 @@ def test_apply_select2():
     assert cls.__bases__ == (widgets.Select2Mixin, forms.Select)
 
 
-def test_select2_meta_factory_empty_widgets():
-    cm = utils.select2_meta_factory(m.EmptyModel)
+def test_select2_modelform_meta_empty_widgets():
+    cm = utils.select2_modelform_meta(m.EmptyModel)
     assert cm.__name__ == 'Meta'
     assert cm.__bases__ == (object,)
     assert cm.model == m.EmptyModel
     assert cm.widgets == {}
 
 
-def test_select2_meta_factory_widgets_without_arguments():
-    cm = utils.select2_meta_factory(m.TestFieldsModel)
+def test_select2_modelform_meta_widgets_without_arguments():
+    cm = utils.select2_modelform_meta(m.TestFieldsModel)
     assert cm.__name__ == 'Meta'
     assert cm.__bases__ == (object,)
     assert cm.model == m.TestFieldsModel
@@ -35,8 +35,8 @@ def test_select2_meta_factory_widgets_without_arguments():
     assert 'text' not in cm.widgets
 
 
-def test_select2_meta_factory_with_arguments():
-    cm = utils.select2_meta_factory(
+def test_select2_modelform_meta_with_arguments():
+    cm = utils.select2_modelform_meta(
         m.TestFieldsModel,
         meta_fields={'extra_field': 1},
         widgets={
@@ -49,12 +49,27 @@ def test_select2_meta_factory_with_arguments():
     assert isinstance(cm.widgets['fk_field'], widgets.Select2)
 
 
+def test_select2_modelform_meta_kwargs():
+    cm = utils.select2_modelform_meta(m.TestFieldsModel)
+    assert cm.exclude == []
+    cm = utils.select2_modelform_meta(
+        m.TestFieldsModel,
+        fields=['text'],
+    )
+    assert cm.fields == ['text']
+    cm = utils.select2_modelform_meta(
+        m.TestFieldsModel,
+        exclude=['text'],
+    )
+    assert cm.exclude == ['text']
+
+
 # Select2 has already been imported by easy_select2.utils module
 @mock.patch('easy_select2.utils.Select2Multiple')
 @mock.patch('easy_select2.utils.Select2')
-def test_select2_meta_factory_with_blank_attrs_argument(
+def test_select2_modelform_meta_with_blank_attrs_argument(
         Select2Mock, Select2MultipleMock):
-    utils.select2_meta_factory(m.TestFieldsModel)
+    utils.select2_modelform_meta(m.TestFieldsModel)
     Select2Mock.assert_called_with(select2attrs=None)
     assert Select2Mock.call_count == 2
     Select2MultipleMock.assert_called_with(select2attrs=None)
@@ -64,10 +79,10 @@ def test_select2_meta_factory_with_blank_attrs_argument(
 # Select2 has already been imported by easy_select2.utils module
 @mock.patch('easy_select2.utils.Select2Multiple')
 @mock.patch('easy_select2.utils.Select2')
-def test_select2_meta_factory_with_attrs_argument(
+def test_select2_modelform_meta_with_attrs_argument(
         Select2Mock, Select2MultipleMock):
     attrs = {'attribute': True}
-    utils.select2_meta_factory(m.TestFieldsModel, attrs=attrs)
+    utils.select2_modelform_meta(m.TestFieldsModel, attrs=attrs)
     Select2Mock.assert_called_with(select2attrs=attrs)
     assert Select2Mock.call_count == 2
     Select2MultipleMock.assert_called_with(select2attrs=attrs)
