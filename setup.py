@@ -27,7 +27,7 @@ for dirpath, dirnames, filenames in os.walk('easy_select2'):
 
 setup(
     name="django-easy-select2",
-    version="1.2.10",
+    version="1.2.11",
     packages=find_packages(),
     author="asyncee",
     description="Django select2 theme for select input widgets.",
