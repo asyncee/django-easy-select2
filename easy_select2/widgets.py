@@ -10,7 +10,9 @@ SELECT2_JS = getattr(settings, 'SELECT2_JS',
                      'easy_select2/vendor/select2/select2.min.js')
 SELECT2_CSS = getattr(settings, 'SELECT2_CSS',
                       'easy_select2/vendor/select2/select2.min.css')
-SELECT2_USE_BUNDLED_JQUERY = getattr(settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
+SELECT2_USE_BUNDLED_JQUERY = getattr(settings,
+                                     'SELECT2_USE_BUNDLED_JQUERY',
+                                     True)
 
 SELECT2_WIDGET_JS = [
     static('easy_select2/js/init.js'),
@@ -20,7 +22,8 @@ SELECT2_WIDGET_JS = [
 ]
 
 if SELECT2_USE_BUNDLED_JQUERY:
-    SELECT2_WIDGET_JS.insert(0, static('easy_select2/vendor/jquery/jquery.min.js'))
+    jquery_min_file = 'easy_select2/vendor/jquery/jquery.min.js'
+    SELECT2_WIDGET_JS.insert(0, static(jquery_min_file))
 
 
 class Select2Mixin(object):
@@ -30,7 +33,10 @@ class Select2Mixin(object):
 
     Generally should be mixed with widgets that render select input.
     """
-    html = """<div class="field-easy-select2" style="display:none" id="{id}" {options}></div>"""
+    html = """<div class="field-easy-select2"
+                   style="display:none"
+                   id="{id}"
+                   {options}></div>"""
 
     def __init__(self, select2attrs=None, *args, **kwargs):
         """
@@ -47,7 +53,7 @@ class Select2Mixin(object):
         assert isinstance(self.select2attrs, dict), assert_msg.format(
             self.select2attrs.__class__.__name__
         )
-        if not 'width' in self.select2attrs:
+        if 'width' not in self.select2attrs:
             self.select2attrs.update({'width': '250px'})
         super(Select2Mixin, self).__init__(*args, **kwargs)
 
