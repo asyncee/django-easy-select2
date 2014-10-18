@@ -1,6 +1,8 @@
 import os
+import sys
 
 from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
 
 
 # Some initialization
@@ -23,6 +25,17 @@ for dirpath, dirnames, filenames in os.walk('easy_select2'):
         prefix = dirpath[13:] # Strip "easy_select2/" or "easy_select2\"
         for f in filenames:
             data_files.append(os.path.join(prefix, f))
+
+class Tox(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+    def run_tests(self):
+        #import here, cause outside the eggs aren't loaded
+        import tox
+        errcode = tox.cmdline(self.test_args)
+        sys.exit(errcode)
 
 
 setup(
@@ -54,4 +67,7 @@ setup(
     package_dir={'easy_select2': 'easy_select2'},
     package_data={'easy_select2': data_files},
     zip_safe=False,
+
+    tests_require=['tox'],
+    cmdclass = {'test': Tox},
 )
