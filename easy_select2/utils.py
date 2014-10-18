@@ -1,11 +1,11 @@
 # coding: utf-8
 
-from django import forms
 from django.db.models import ForeignKey
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 
 from easy_select2.widgets import Select2Mixin, Select2, Select2Multiple
+from easy_select2 import forms as es2_forms
 
 
 # TODO: merge meta_fields and kwargs, which is the same.
@@ -60,7 +60,8 @@ select2_meta_factory = select2_modelform_meta
 
 
 # TODO: make FixedModelForm default form_class
-def select2_modelform(model, attrs=None, form_class=forms.ModelForm):
+def select2_modelform(model, attrs=None,
+                      form_class=es2_forms.FixedModelForm):
     """
     Return ModelForm class for model with select2 widgets.
 
