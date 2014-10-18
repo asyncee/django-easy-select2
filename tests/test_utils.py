@@ -7,6 +7,7 @@ from django import forms
 from easy_select2 import utils
 from easy_select2 import widgets
 from easy_select2 import models as m
+from easy_select2 import forms as es2_forms
 
 
 def test_apply_select2():
@@ -92,7 +93,7 @@ def test_select2_modelform_meta_with_attrs_argument(
 def test_select2_modelform():
     form_class = utils.select2_modelform(m.TestFieldsModel)
     assert form_class.__name__ == 'TestFieldsModelForm'
-    assert form_class.__bases__ == (forms.ModelForm,)
+    assert issubclass(form_class, forms.ModelForm)
     assert hasattr(form_class, 'Meta') == True
 
 
@@ -103,9 +104,10 @@ def test_select2_modelform_form_class_argument():
         m.TestFieldsModel,
         form_class=TestForm,
     )
-    assert form_class.__name__ == 'TestFieldsModelForm'
-    assert form_class.__bases__ == (TestForm,)
-    assert hasattr(form_class, 'Meta') == True
+    assert issubclass(form_class, TestForm)
+
+    form_class = utils.select2_modelform(m.TestFieldsModel)
+    assert issubclass(form_class, es2_forms.FixedModelForm)
 
 
 @mock.patch('easy_select2.utils.select2_modelform_meta')
