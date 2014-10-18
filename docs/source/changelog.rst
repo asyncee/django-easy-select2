@@ -3,6 +3,9 @@ Changelog
 
 Version 1.2
 -----------
+1.2.12
+~~~~~~
+- fixed issue#2
 
 1.2.11
 ~~~~~~
