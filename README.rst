@@ -1,31 +1,11 @@
 This is django application that brings select2 widget to select inputs
 in admin.
 
-.. image:: https://travis-ci.org/asyncee/django-easy-select2.svg?branch=master
-    :target: https://travis-ci.org/asyncee/django-easy-select2
+---------------
 
-.. image:: https://coveralls.io/repos/asyncee/django-easy-select2/badge.png?branch=master
-    :target: https://coveralls.io/r/asyncee/django-easy-select2?branch=master
+|python| |pypi| |travis| |coveralls| |license|
 
-.. image:: https://pypip.in/download/django-easy-select2/badge.svg
-    :target: https://pypi.python.org/pypi/django-easy-select2/
-    :alt: Downloads
-
-.. image:: https://pypip.in/version/django-easy-select2/badge.svg?text=pypi
-    :target: https://pypi.python.org/pypi/django-easy-select2/
-    :alt: Latest Version
-
-.. image:: https://pypip.in/py_versions/django-easy-select2/badge.svg
-    :target: https://pypi.python.org/pypi/django-easy-select2/
-    :alt: Supported Python versions
-
-.. image:: https://pypip.in/status/django-easy-select2/badge.svg
-    :target: https://pypi.python.org/pypi/django-easy-select2/
-    :alt: Development Status
-
-.. image:: https://pypip.in/license/django-easy-select2/badge.svg
-    :target: https://pypi.python.org/pypi/django-easy-select2/
-    :alt: License
+---------------
 
 
 Project aims to support **Python 2.7**, **3.3** and **3.4**,
@@ -78,3 +58,23 @@ Documentation
 You can read more in the documentation_.
 
 .. _documentation: http://django-easy-select2.readthedocs.org
+
+.. |pypi| image:: https://img.shields.io/pypi/v/django-easy-select2.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-easy-select2
+    :alt: pypi
+
+.. |travis| image:: https://img.shields.io/travis/asyncee/django-easy-select2.svg?style=flat-square
+    :target: https://travis-ci.org/asyncee/django-easy-select2
+    :alt: Travis Build
+
+.. |coveralls| image:: https://img.shields.io/coveralls/asyncee/django-easy-select2.svg?style=flat-square
+    :target: https://coveralls.io/r/asyncee/django-easy-select2
+    :alt: coverage
+
+.. |license| image:: https://img.shields.io/github/license/asyncee/django-easy-select2.svg?style=flat-square
+    :target: https://github.com/asyncee/django-easy-select2/blob/master/LICENSE.txt
+    :alt: MIT License
+
+.. |python| image:: https://img.shields.io/badge/python-2.7, 3.x-blue.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-easy-select2
+    :alt: Python 2.7, 3.x
