@@ -54,7 +54,7 @@ class Select2Mixin(object):
                 Select2 constructor function as options.
         """
         self.select2attrs = select2attrs or {}
-        assert_msg = "select2attrs attribute must dict not {}"
+        assert_msg = "select2attrs attribute must be dict, not {}"
         assert isinstance(self.select2attrs, dict), assert_msg.format(
             self.select2attrs.__class__.__name__
         )
