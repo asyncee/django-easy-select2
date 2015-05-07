@@ -55,10 +55,6 @@ def select2_modelform_meta(model,
     return meta
 
 
-# select2_meta_factory is deprecated name
-select2_meta_factory = select2_modelform_meta
-
-
 # TODO: make FixedModelForm default form_class
 def select2_modelform(model, attrs=None,
                       form_class=es2_forms.FixedModelForm):
