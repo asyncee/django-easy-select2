@@ -1,6 +1,19 @@
 Changelog
 =========
 
+Version 1.3
+-----------
+
+.. WARNING::
+
+  Version 1.3 introduced backward incompatible changes, read below.
+
+- `Select2` updated to 4.0.0
+- updated jquery to 2.1.3
+- removed deprecated `select2_meta_factory`, `Select2TextMixin` and
+  `Select2TextInput`.
+
+
 Version 1.2
 -----------
 1.2.12
