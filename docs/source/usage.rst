@@ -2,10 +2,7 @@ Usage
 -----
 
 There are :class:`.Select2` and
-:class:`.Select2Multiple` widget classes for
-choice fields and :class:`.Select2TextInput`
-for non-choice fields which can prodive a list of pre-set choices,
-or can accept arbitrary input.
+:class:`.Select2Multiple` widget classes for choice fields.
 
 You can use ``Select2`` and ``Select2Multiple`` on any form field,
 as usual django widget::
@@ -32,20 +29,6 @@ or::
 ``Select2Mixin`` is a simple widget mixin with predefined ``Media``
 class and custom render method, which applies `$.fn.select2()`
 method on html input.
-
-To use :class:`.Select2TextInput` do NOT set a choices attribute on the
-model field, but DO supply a :attr:`data` attribute to :attr:`select2attrs`
-that contains a list of dictionaries each having at least an :attr:`id`
-and :attr:`text` terms like so::
-
-      form.fields['myfield'].widget = Select2TextInput(
-          select2attrs={
-              'data': [ {'id': 'your data', 'text': 'your data'}, ... ],
-          },
-      )
-
-``Select2TextInput`` will be rendered as combo-box widget that can
-accept arbitrary input, but also has some default choices for user.
 
 .. WARNING::
 
