@@ -38,10 +38,6 @@ def select2_modelform_meta(model,
 
     for field in model._meta.many_to_many:
         widgets.update({field.name: Select2Multiple(select2attrs=attrs)})
-        # TODO: move this hackish bugfix to another mixin
-        msg = _('Hold down "Control", or "Command" on a Mac, '
-                'to select more than one.')
-        field.help_text = field.help_text.replace(force_text(msg), '')
 
     meta_fields.update({
         'model': model,
