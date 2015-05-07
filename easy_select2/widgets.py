@@ -6,13 +6,18 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 
 
-SELECT2_JS = getattr(settings, 'SELECT2_JS',
-                     'easy_select2/vendor/select2/select2.min.js')
-SELECT2_CSS = getattr(settings, 'SELECT2_CSS',
-                      'easy_select2/vendor/select2/select2.min.css')
-SELECT2_USE_BUNDLED_JQUERY = getattr(settings,
-                                     'SELECT2_USE_BUNDLED_JQUERY',
-                                     True)
+SELECT2_JS = getattr(
+    settings,
+    'SELECT2_JS',
+    'easy_select2/vendor/select2/js/select2.min.js',
+)
+SELECT2_CSS = getattr(
+    settings,
+    'SELECT2_CSS',
+    'easy_select2/vendor/select2/css/select2.min.css',
+)
+SELECT2_USE_BUNDLED_JQUERY = getattr(
+    settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
 
 SELECT2_WIDGET_JS = [
     static('easy_select2/js/init.js'),
