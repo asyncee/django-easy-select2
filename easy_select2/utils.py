@@ -51,9 +51,8 @@ def select2_modelform_meta(model,
     return meta
 
 
-# TODO: make FixedModelForm default form_class
-def select2_modelform(model, attrs=None,
-                      form_class=es2_forms.FixedModelForm):
+def select2_modelform(
+        model, attrs=None, form_class=es2_forms.FixedModelForm):
     """
     Return ModelForm class for model with select2 widgets.
 
