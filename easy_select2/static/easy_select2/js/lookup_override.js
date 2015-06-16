@@ -1,11 +1,11 @@
-if (typeof(dismissAddAnotherPopup) == "function") {
-    var originalDismissAddAnotherPopup = dismissAddAnotherPopup;
+if (typeof(dismissAddRelatedObjectPopup) == "function") {
+    var originaldismissAddRelatedObjectPopup = dismissAddRelatedObjectPopup;
 
     (function(){
-        // Extend dismissAddAnotherPopup with ``select2changed`` event.
-        dismissAddAnotherPopup = function(win, newId, newRepr) {
+        // Extend dismissAddRelatedObjectPopup with ``select2changed`` event.
+        dismissAddRelatedObjectPopup = function(win, newId, newRepr) {
             var name = windowname_to_id(win.name);
-            originalDismissAddAnotherPopup(win, newId, newRepr);
+            originaldismissAddRelatedObjectPopup(win, newId, newRepr);
             $('#' + name).trigger('select2changed');
         }
     })()
