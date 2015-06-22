@@ -12,6 +12,14 @@ Project aims to support **Python 2.7**, **3.3** and **3.4**,
 **Django 1.6**, **1.7** and **1.8**.
 
 
+**UPGRADE NOTES** : Version 1.3 introduced backward incompatible
+changes. Read more in changelog_.
+
+Also, ``Select2`` library was upgraded from **3.4**
+to **4.0.0**. If you are tied to older version, please, use
+``django-easy-select2 1.2.13``.
+
+
 How it looks
 ------------
 
@@ -22,17 +30,11 @@ Select one of existing values with single-valued choice field
     :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_single.png
 
 Easily select 1 or more "categories" for your project, you can also
-add a new one in the normal, Django-Admin manner by using the green + button
-with multiple-valued choice field (ManyToManyField):
+add a new one in the normal, Django-Admin manner by using the
+green + button with multiple-valued choice field (ManyToManyField):
 
 .. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_multiple.png
     :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_multiple.png
-
-Don't see the "mood" you want? No problem, just type in a new one.
-It will be there as a choice for the next time too (text input).
-
-.. image:: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input.png
-    :target: https://github.com/asyncee/django-easy-select2/raw/master/screenshots/select2_text_input.png
 
 
 Quickstart
@@ -58,6 +60,8 @@ Documentation
 You can read more in the documentation_.
 
 .. _documentation: http://django-easy-select2.readthedocs.org
+
+.. _changelog: http://django-easy-select2.readthedocs.org/en/latest/changelog.html
 
 .. |pypi| image:: https://img.shields.io/pypi/v/django-easy-select2.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-easy-select2
