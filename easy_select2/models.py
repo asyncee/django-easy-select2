@@ -1,3 +1,11 @@
+# coding: utf-8
+
+#
+# Models `Related`, `TestFieldsModel` and `EmptyModel` are
+# used only in tests.
+#
+
+
 from django.db import models
 
 

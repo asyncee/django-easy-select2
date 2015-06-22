@@ -40,7 +40,7 @@ class Tox(TestCommand):
 
 setup(
     name="django-easy-select2",
-    version="1.2.13",
+    version="1.3",
     packages=find_packages(),
     author="asyncee",
     description="Django select2 theme for select input widgets.",
@@ -69,5 +69,5 @@ setup(
     zip_safe=False,
 
     tests_require=['tox'],
-    cmdclass = {'test': Tox},
+    cmdclass={'test': Tox},
 )
