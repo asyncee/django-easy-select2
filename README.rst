@@ -12,7 +12,7 @@ Project aims to support **Python 2.7**, **3.3** and **3.4**,
 **Django 1.6**, **1.7** and **1.8**.
 
 
-** UPGRADE NOTES ** : Version 1.3 introduced backward incompatible
+**UPGRADE NOTES** : Version 1.3 introduced backward incompatible
 changes. Read more in changelog_.
 
 Also, ``Select2`` library was upgraded from **3.4**
