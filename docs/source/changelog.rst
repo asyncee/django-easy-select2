@@ -3,6 +3,10 @@ Changelog
 
 Version 1.2
 -----------
+1.2.13
+~~~~~~
+- fixed issue #22, thanks to *zeta83*
+
 1.2.12
 ~~~~~~
 - fixed issue#2
