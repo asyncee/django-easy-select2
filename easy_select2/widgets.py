@@ -36,6 +36,13 @@ if SELECT2_USE_BUNDLED_JQUERY:
     jquery_min_file = 'easy_select2/vendor/jquery/jquery.min.js'
     SELECT2_WIDGET_JS.insert(0, static(jquery_min_file))
 
+SELECT2_WIDGET_CSS = {
+    'screen': [
+        static(SELECT2_CSS),
+        static('easy_select2/css/easy_select2.css'),
+    ],
+}
+
 
 class Select2Mixin(object):
     """
@@ -106,11 +113,7 @@ class Select2Mixin(object):
 
     class Media:
         js = SELECT2_WIDGET_JS
-        css = {
-            'screen': [
-                static(SELECT2_CSS)
-            ],
-        }
+        css = SELECT2_WIDGET_CSS
 
 
 class Select2(Select2Mixin, forms.Select):
