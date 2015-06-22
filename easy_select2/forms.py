@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
 
 
-M = _(' Hold down "Control", or "Command" on a Mac, to select more than one.')
+M = _('Hold down "Control", or "Command" on a Mac, to select more than one.')
 class FixedModelForm(forms.ModelForm):
     """
     Simple child of ModelForm that removes the 'Hold down "Control" ...'
