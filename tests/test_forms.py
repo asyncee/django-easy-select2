@@ -13,5 +13,5 @@ class TestFixedModelForm(FixedModelForm):
 
 def test_fixedmodelform():
     form = TestFixedModelForm()
-    assert form.fields['fk_field'].help_text == ''
-    assert form.fields['m2m_field'].help_text == ''
+    assert form.fields['fk_field'].help_text.strip() == ''
+    assert form.fields['m2m_field'].help_text.strip() == ''
