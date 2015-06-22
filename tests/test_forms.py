@@ -8,6 +8,7 @@ from easy_select2.models import TestFieldsModel
 class TestFixedModelForm(FixedModelForm):
     class Meta:
         model = TestFieldsModel
+        exclude = []
 
 
 def test_fixedmodelform():
