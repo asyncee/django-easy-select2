@@ -1,5 +1,6 @@
 import json
 
+import django
 from django import forms
 from django.templatetags.static import static
 from django.conf import settings
@@ -14,10 +15,15 @@ SELECT2_USE_BUNDLED_JQUERY = getattr(settings,
                                      'SELECT2_USE_BUNDLED_JQUERY',
                                      True)
 
+if django.VERSION[1] <= 7:  # django 1.7 and lower
+    lookup_override_filename = 'lookup_override.1.7.js'
+else:  # django 1.8+
+    lookup_override_filename = 'lookup_override.1.8.js'
+
 SELECT2_WIDGET_JS = [
     static('easy_select2/js/init.js'),
     static('easy_select2/js/easy_select2.js'),
-    static('easy_select2/js/lookup_override.js'),
+    static('easy_select2/js/{}'.format(lookup_override_filename)),
     static(SELECT2_JS),
 ]
 
