@@ -71,3 +71,21 @@ def test_select2mixin_render(mocked):
     result = s.render(attrs={'id': 'some_id'})
     expected = "supersome_js"
     assert result == expected
+
+
+def test_staticfiles_url(settings):
+    js = widgets.SELECT2_WIDGET_JS
+    css = widgets.SELECT2_WIDGET_CSS
+
+    def all_startswith(string, iterable):
+        return all([x.startswith(string) for x in iterable])
+
+    assert all_startswith(
+        settings.STATIC_URL,
+        js,
+    )
+    for k, v in css.items():
+        assert all_startswith(
+            settings.STATIC_URL,
+            v,
+        )
