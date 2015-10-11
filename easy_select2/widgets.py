@@ -2,9 +2,12 @@ import json
 
 import django
 from django import forms
-from django.templatetags.static import static
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf import settings
 from django.utils.safestring import mark_safe
+
+
+static = staticfiles_storage.url
 
 
 SELECT2_JS = getattr(
