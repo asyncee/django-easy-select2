@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 1.3.1
+-------------
+
+- support for django staticfiles storage, thanks to *martolini* for idea
+
+
 Version 1.3
 -----------
 
