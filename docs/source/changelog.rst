@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 1.3.2
+-------------
+
+- Fixed #24, big thanks to *Andrzej Mateja*
+
+
 Version 1.3.1
 -------------
 
