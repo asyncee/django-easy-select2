@@ -9,7 +9,7 @@ in admin.
 
 
 Project aims to support **Python 2.7** and **3.4** (at least),
-**Django 1.6**, **1.7** and **1.8**.
+**Django 1.7**, **1.8** and **1.9**.
 
 
 **UPGRADE NOTES** : Version 1.3 introduced backward incompatible
