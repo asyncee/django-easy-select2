@@ -5,24 +5,21 @@ from django import forms
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
-
 SELECT2_JS = getattr(
-    settings,
-    'SELECT2_JS',
-    'easy_select2/vendor/select2/js/select2.min.js',
+        settings,
+        'SELECT2_JS',
+        'easy_select2/vendor/select2/js/select2.min.js',
 )
 SELECT2_CSS = getattr(
-    settings,
-    'SELECT2_CSS',
-    'easy_select2/vendor/select2/css/select2.min.css',
+        settings,
+        'SELECT2_CSS',
+        'easy_select2/vendor/select2/css/select2.min.css',
 )
 SELECT2_USE_BUNDLED_JQUERY = getattr(
-    settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
+        settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
 
-if django.VERSION[1] <= 7:  # django 1.7 and lower
-    lookup_override_filename = 'lookup_override.1.7.js'
-else:  # django 1.8+
-    lookup_override_filename = 'lookup_override.1.8.js'
+lookup_override_filename = 'lookup_override.1.7.js' \
+    if django.VERSION[1] < 8 else 'lookup_override.1.8.js'
 
 SELECT2_WIDGET_JS = [
     'easy_select2/js/init.js',
@@ -68,7 +65,7 @@ class Select2Mixin(object):
         self.select2attrs = select2attrs or {}
         assert_msg = "select2attrs attribute must be dict, not {}"
         assert isinstance(self.select2attrs, dict), assert_msg.format(
-            self.select2attrs.__class__.__name__
+                self.select2attrs.__class__.__name__
         )
         if 'width' not in self.select2attrs:
             self.select2attrs.update({'width': '250px'})
@@ -87,15 +84,15 @@ class Select2Mixin(object):
             if isinstance(value, (dict, list)):
                 value = json.dumps(value)
             output.append("data-{name}='{value}'".format(
-                name=key,
-                value=mark_safe(value)))
+                    name=key,
+                    value=mark_safe(value)))
         return mark_safe(' '.join(output))
 
     def render_js_code(self, id_, *args, **kwargs):
         """Render html container for Select2 widget with options."""
         if id_:
             options = self.render_select2_options_code(
-                dict(self.get_options()), id_)
+                    dict(self.get_options()), id_)
             return mark_safe(self.html.format(id=id_, options=options))
         return u''
 
@@ -110,13 +107,9 @@ class Select2Mixin(object):
 
         return mark_safe(output)
 
-    def _media(self):
-        return forms.Media(
-            js=SELECT2_WIDGET_JS,
-            css=SELECT2_WIDGET_CSS,
-        )
-
-    media = property(_media)
+    class Media:
+        css = SELECT2_WIDGET_CSS
+        js = SELECT2_WIDGET_JS
 
 
 class Select2(Select2Mixin, forms.Select):
