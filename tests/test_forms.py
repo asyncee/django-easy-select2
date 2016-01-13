@@ -1,6 +1,5 @@
 # coding: utf-8
 
-from django import forms
 from easy_select2.forms import FixedModelForm
 from easy_select2.models import TestFieldsModel
 

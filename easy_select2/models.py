@@ -28,6 +28,5 @@ class TestFieldsModel(models.Model):
 
 
 class EmptyModel(models.Model):
-
     class Meta:
         managed = False

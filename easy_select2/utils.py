@@ -1,11 +1,9 @@
 # coding: utf-8
 
 from django.db.models import ForeignKey
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
 
-from easy_select2.widgets import Select2Mixin, Select2, Select2Multiple
 from easy_select2 import forms as es2_forms
+from easy_select2.widgets import Select2Mixin, Select2, Select2Multiple
 
 
 # TODO: merge meta_fields and kwargs, which is the same.
