@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
-import pytest
 import mock
+import pytest
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 from easy_select2 import widgets
@@ -79,14 +79,15 @@ def test_staticfiles_url(settings):
     css = widgets.SELECT2_WIDGET_CSS
 
     def all_startswith(string, iterable):
-        return all([staticfiles_storage.url(x).startswith(string) for x in iterable])
+        return all([staticfiles_storage.url(x).startswith(string)
+                    for x in iterable])
 
     assert all_startswith(
-        settings.STATIC_URL,
-        js,
+            settings.STATIC_URL,
+            js,
     )
     for k, v in css.items():
         assert all_startswith(
-            settings.STATIC_URL,
-            v,
+                settings.STATIC_URL,
+                v,
         )

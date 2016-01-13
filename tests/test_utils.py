@@ -1,13 +1,12 @@
 from __future__ import print_function
 
 import mock
-
 from django import forms
 
+from easy_select2 import forms as es2_forms
+from easy_select2 import models as m
 from easy_select2 import utils
 from easy_select2 import widgets
-from easy_select2 import models as m
-from easy_select2 import forms as es2_forms
 
 
 def test_apply_select2():
@@ -38,12 +37,12 @@ def test_select2_modelform_meta_widgets_without_arguments():
 
 def test_select2_modelform_meta_with_arguments():
     cm = utils.select2_modelform_meta(
-        m.TestFieldsModel,
-        meta_fields={'extra_field': 1},
-        widgets={
-            'text': forms.TextInput,
-            'fk_field': forms.TextInput,  # must change to Select2
-        },
+            m.TestFieldsModel,
+            meta_fields={'extra_field': 1},
+            widgets={
+                'text': forms.TextInput,
+                'fk_field': forms.TextInput,  # must change to Select2
+            },
     )
     assert cm.extra_field == 1
     assert cm.widgets['text'] == forms.TextInput
@@ -54,13 +53,13 @@ def test_select2_modelform_meta_kwargs():
     cm = utils.select2_modelform_meta(m.TestFieldsModel)
     assert cm.exclude == []
     cm = utils.select2_modelform_meta(
-        m.TestFieldsModel,
-        fields=['text'],
+            m.TestFieldsModel,
+            fields=['text'],
     )
     assert cm.fields == ['text']
     cm = utils.select2_modelform_meta(
-        m.TestFieldsModel,
-        exclude=['text'],
+            m.TestFieldsModel,
+            exclude=['text'],
     )
     assert cm.exclude == ['text']
 
@@ -100,9 +99,10 @@ def test_select2_modelform():
 def test_select2_modelform_form_class_argument():
     class TestForm(forms.ModelForm):
         pass
+
     form_class = utils.select2_modelform(
-        m.TestFieldsModel,
-        form_class=TestForm,
+            m.TestFieldsModel,
+            form_class=TestForm,
     )
     assert issubclass(form_class, TestForm)
 
@@ -117,4 +117,3 @@ def test_select2_modelform_attrs_argument(mock):
     attrs = {'attr': False}
     utils.select2_modelform(m.TestFieldsModel, attrs=attrs)
     mock.assert_called_with(m.TestFieldsModel, attrs=attrs)
-
