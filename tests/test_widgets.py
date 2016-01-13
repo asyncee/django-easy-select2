@@ -86,7 +86,7 @@ def test_staticfiles_url(settings):
             settings.STATIC_URL,
             js,
     )
-    for k, v in css.items():
+    for v in css.values():
         assert all_startswith(
                 settings.STATIC_URL,
                 v,
