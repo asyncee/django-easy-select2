@@ -19,10 +19,8 @@ SELECT2_CSS = getattr(
 SELECT2_USE_BUNDLED_JQUERY = getattr(
     settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
 
-if django.VERSION[1] <= 7:  # django 1.7 and lower
-    lookup_override_filename = 'lookup_override.1.7.js'
-else:  # django 1.8+
-    lookup_override_filename = 'lookup_override.1.8.js'
+lookup_override_filename = 'lookup_override.1.7.js' \
+    if django.VERSION[1] < 8 else 'lookup_override.1.8.js'
 
 SELECT2_WIDGET_JS = [
     'easy_select2/js/init.js',
