@@ -60,17 +60,15 @@ Bugs and workarounds
 This section describes bugs that not fixed yet.
 
 
-**Command error when using `dumpdata` command.**
+**BUG:** Command error when using `dumpdata` command::
 
-```
-CommandError: Unable to serialize database: no such table: easy_select2_related
-```
-_Reference:_ [issue #29](https://github.com/asyncee/django-easy-select2/issues/29)
-_Workaround:_ use `dumpdata` command with `--exclude option`:
+    CommandError: Unable to serialize database: no such table: easy_select2_related
 
-```
-manage.py dumpdata --exclude easy_select2
-```
+**Reference:** issue #29 (https://github.com/asyncee/django-easy-select2/issues/29)
+
+**Workaround:** use ``dumpdata`` command with ``--exclude option``::
+
+    manage.py dumpdata --exclude easy_select2
 
 
 Documentation
