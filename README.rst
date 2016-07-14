@@ -55,6 +55,24 @@ In your admin.py::
 Thats all. All your choice widgets are select2 widgets 250px wide.
 
 
+Bugs and workarounds
+--------------------
+This section describes bugs that not fixed yet.
+
+
+**Command error when using `dumpdata` command.**
+
+```
+CommandError: Unable to serialize database: no such table: easy_select2_related
+```
+_Reference:_ [issue #29](https://github.com/asyncee/django-easy-select2/issues/29)
+_Workaround:_ use `dumpdata` command with `--exclude option`:
+
+```
+manage.py dumpdata --exclude easy_select2
+```
+
+
 Documentation
 -------------
 You can read more in the documentation_.
