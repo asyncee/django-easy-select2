@@ -4,9 +4,9 @@ import mock
 from django import forms
 
 from easy_select2 import forms as es2_forms
-from easy_select2 import models as m
 from easy_select2 import utils
 from easy_select2 import widgets
+from . import models as m
 
 
 def test_apply_select2():
