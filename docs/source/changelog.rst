@@ -1,6 +1,13 @@
 Changelog
 =========
 
+
+Version 1.3.3
+-------------
+
+- Fixed #29 — "Application breaks dumpdata command"
+
+
 Version 1.3.2
 -------------
 
