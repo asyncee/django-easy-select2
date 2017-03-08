@@ -9,11 +9,22 @@ in admin.
 
 
 Project aims to support **Python 2.7** and **3.4** (at least),
-**Django 1.7**, **1.8** and **1.9**.
+**Django 1.7**, **1.8** and **1.9+**.
+
+This django application is just a lightweight wrapper on `Select2` library
+and provides easy-to-use basic select2 functionality in a django project.
+If you need feature-rich solution, i recommend you to look at the latest
+django-select2_ library, which have ajax loading support.
+
+If anyone really wants this functionality in django-easy-select2,
+please feel free to contribute.
+
+.. _django-select2: https://github.com/applegrew/django-select2
 
 
-**UPGRADE NOTES** : Version 1.3 introduced backward incompatible
-changes. Read more in changelog_.
+Upgrade notes
+-------------
+Version 1.3 introduced backward incompatible changes. Read more in changelog_.
 
 Also, ``Select2`` library was upgraded from **3.4**
 to **4.0.0**. If you are tied to older version, please, use
