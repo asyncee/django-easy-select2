@@ -9,7 +9,7 @@ in admin.
 
 
 Project aims to support **Python 2.7** and **3.4** (at least),
-**Django 1.7**, **1.8** and **1.9+**.
+**Django 1.7+**.
 
 This django application is just a lightweight wrapper on `Select2` library
 and provides easy-to-use basic select2 functionality in a django project.
