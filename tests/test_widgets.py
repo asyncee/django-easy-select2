@@ -69,7 +69,7 @@ class TestRender(widgets.Select2Mixin, SuperWithRender):
 def test_select2mixin_render(mocked):
     mocked.return_value = "some_js"
     s = TestRender()
-    result = s.render(attrs={'id': 'some_id'})
+    result = s.render('name', 'value', attrs={'id': 'some_id'})
     expected = "supersome_js"
     assert result == expected
 
