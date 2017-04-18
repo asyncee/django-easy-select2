@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from easy_select2.forms import FixedModelForm
-from .models import TestFieldsModel
+from demoapp.models import TestFieldsModel
 
 
 class TestFixedModelForm(FixedModelForm):
