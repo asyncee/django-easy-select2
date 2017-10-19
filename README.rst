@@ -22,12 +22,6 @@ please feel free to contribute.
 .. _django-select2: https://github.com/applegrew/django-select2
 
 
-Maintainer wanted
-----------------------
-Every project have a need in good, active and reliable maintainer.
-This project does too. If you interested in supporting this project, contact me.
-
-
 Upgrade notes
 -------------
 Version 1.3 introduced backward incompatible changes. Read more in changelog_.
