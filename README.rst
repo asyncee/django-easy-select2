@@ -51,7 +51,9 @@ green + button with multiple-valued choice field (ManyToManyField):
 Quickstart
 ----------
 
-In your admin.py::
+In your admin.py:
+
+.. code-block:: python
 
     from django.contrib import admin
     from easy_select2 import select2_modelform
