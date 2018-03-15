@@ -11,13 +11,19 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 
 class Note(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)  # To demonstrate select2
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # To demonstrate select2
     categories = models.ManyToManyField(Category)  # To demonstrate select2 multiple
 
     def __unicode__(self):
         return u'Note %d' % self.id
+
+    def __str__(self):
+        return 'Note %d' % self.id
 
 
 class Related(models.Model):
@@ -27,7 +33,7 @@ class Related(models.Model):
 class TestFieldsModel(models.Model):
     CHOICES = ((0, 'Zero'), (1, 'One'))
     choice_field = models.IntegerField(choices=CHOICES)
-    fk_field = models.ForeignKey(Related, related_name='+')
+    fk_field = models.ForeignKey(Related, related_name='+', on_delete=models.CASCADE)
     m2m_field = models.ManyToManyField(Related, related_name='+')
     text = models.TextField()
 
