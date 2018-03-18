@@ -40,7 +40,7 @@ class Tox(TestCommand):
 
 setup(
     name="django-easy-select2",
-    version="1.3.4",
+    version="1.4.0",
     packages=find_packages(),
     author="asyncee",
     description="Django select2 theme for select input widgets.",
@@ -56,10 +56,10 @@ setup(
           'Intended Audience :: Developers',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python',
-          'Programming Language :: Python :: 2',
-          'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
           'Programming Language :: Python :: 3.4',
+          'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.6',
           'Topic :: Software Development :: Widget Sets',
     ],
 
