@@ -1,6 +1,18 @@
 Changelog
 =========
 
+Version 1.4.0
+-------------
+
+.. WARNING::
+
+  Version 1.4.0 introduced backward incompatible changes, read below.
+
+- Fixed #38 - "Related model combobox doesn't update after add in Django 2"
+- Dropping support for Python 2.x
+- Django 2.0+ support. Demoapp updated to reflect the needed changes.
+- Python 3.x+ support (recommended Python3.4 and above)
+
 Version 1.3.4
 -------------
 
