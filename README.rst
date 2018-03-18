@@ -8,8 +8,13 @@ in admin.
 ---------------
 
 
-Project aims to support **Python 2.7** and **3.4** (at least),
-**Django 1.8+**.
+Project aims to support **3.4**(at least) and above,
+**Django 2.0+**.
+
+Current stable version is **1.4**, dropping support for **python-2.x**.
+
+For **Django < 2.0** version support or **python-2.x** compatibility, please use version **1.3.4** which is
+the last version to support **python-2.x** compatibility.
 
 This django application is just a lightweight wrapper on `Select2` library
 and provides easy-to-use basic select2 functionality in a django project.
@@ -24,6 +29,8 @@ please feel free to contribute.
 
 Upgrade notes
 -------------
+Version 1.4 introduced backward incompatible changes. Read more in changelog_.
+
 Version 1.3 introduced backward incompatible changes. Read more in changelog_.
 
 Also, ``Select2`` library was upgraded from **3.4**
@@ -92,6 +99,6 @@ You can read more in the documentation_.
     :target: https://github.com/asyncee/django-easy-select2/blob/master/LICENSE.txt
     :alt: MIT License
 
-.. |python| image:: https://img.shields.io/badge/python-2.7, 3.x-blue.svg?style=flat-square
+.. |python| image:: https://img.shields.io/badge/python-3.x-blue.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-easy-select2
-    :alt: Python 2.7, 3.x
+    :alt: Python 3.x
