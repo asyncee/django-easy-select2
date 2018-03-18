@@ -5,7 +5,6 @@ if [ ! -d env ]; then
     rm -rf env
 fi
 echo ">>> Installing django into new virtualenv"
-virtualenv env &&
-source ./env/bin/activate &&
-pip install -r requirements.txt
-pip install -e ../
+virtualenv env -p python3
+env/bin/pip install -r requirements.txt
+env/bin/pip install -e ../

@@ -7,11 +7,15 @@ Sample project useful for testing django applications and other utility needs.
 Installation
 ------------
 
-1. git clone https://github.com/asyncee/django-easy-select2.git
-2. cd django-easy-select2/sampleproject
-3. ./bootstrap.sh - creates virtualenv and installs django (from requirements.txt)
-4. source env/bin/activate
-5. ./manage.py syncdb --migrate
+.. code-block:: bash
+
+    git clone https://github.com/asyncee/django-easy-select2.git
+    cd django-easy-select2/sampleproject
+    ./bootstrap.sh  # creates virtualenv and installs django (from requirements.txt)
+    source env/bin/activate
+    ./manage.py migrate
+    ./manage.py createsuperuser
+    ./manage.py runserver
 
 
 Configuration
