@@ -13,7 +13,7 @@ as usual django widget::
 or::
 
     class Form(forms.Form):
-        field = forms.ModelChoiceField(queryset=qs, widget=Select2Multiple(
+        field = forms.ModelMultipleChoiceField(queryset=qs, widget=Select2Multiple(
             select2attrs={'width': 'auto'}
         ))
 
