@@ -6,14 +6,15 @@ import os
 import re
 
 from docutils import nodes
-from docutils.parsers.rst import directives
-
-from sphinx import addnodes, __version__ as sphinx_ver
+from docutils.parsers.rst import Directive, directives
+from docutils.statemachine import ViewList
+from sphinx import addnodes
 from sphinx.builders.html import StandaloneHTMLBuilder
-from sphinx.writers.html import SmartyPantsHTMLTranslator
+from sphinx.directives import CodeBlock
+from sphinx.domains.std import Cmdoption
 from sphinx.util.console import bold
-from sphinx.util.compat import Directive
 from sphinx.util.nodes import set_source_info
+from sphinx.writers.html import HTMLTranslator
 
 # RE for option descriptions without a '--' prefix
 simple_option_desc_re = re.compile(
@@ -47,12 +48,7 @@ def setup(app):
         indextemplate="pair: %s; django-admin command",
         parse_node=parse_django_admin_node,
     )
-    app.add_description_unit(
-        directivename="django-admin-option",
-        rolename="djadminopt",
-        indextemplate="pair: %s; django-admin command-line option",
-        parse_node=parse_django_adminopt_node,
-    )
+    app.add_directive('django-admin-option', Cmdoption)
     app.add_config_value('django_next_version', '0.0', True)
     app.add_directive('versionadded', VersionDirective)
     app.add_directive('versionchanged', VersionDirective)
@@ -68,6 +64,19 @@ def setup(app):
                  man=(visit_snippet_literal, depart_snippet_literal),
                  text=(visit_snippet_literal, depart_snippet_literal),
                  texinfo=(visit_snippet_literal, depart_snippet_literal))
+    app.set_translator('djangohtml', DjangoHTMLTranslator)
+    app.set_translator('json', DjangoHTMLTranslator)
+    app.add_node(
+        ConsoleNode,
+        html=(visit_console_html, None),
+        latex=(visit_console_dummy, depart_console_dummy),
+        man=(visit_console_dummy, depart_console_dummy),
+        text=(visit_console_dummy, depart_console_dummy),
+        texinfo=(visit_console_dummy, depart_console_dummy),
+    )
+    app.add_directive('console', ConsoleDirective)
+    app.connect('html-page-context', html_page_context_hook)
+    return {'parallel_read_safe': True}
 
 
 class snippet_with_filename(nodes.literal_block):
@@ -114,7 +123,7 @@ def visit_snippet(self, node):
                                                    linenos=linenos,
                                                    **highlight_args)
     starttag = self.starttag(node, 'div', suffix='',
-                             CLASS='highlight-%s' % lang)
+                             CLASS='highlight-%s snippet' % lang)
     self.body.append(starttag)
     self.body.append('<div class="snippet-filename">%s</div>\n''' % (fname,))
     self.body.append(highlighted)
@@ -126,14 +135,8 @@ def visit_snippet_latex(self, node):
     """
     Latex document generator visit handler
     """
-    self.verbatim = ''
+    code = node.rawsource.rstrip('\n')
 
-
-def depart_snippet_latex(self, node):
-    """
-    Latex document generator depart handler.
-    """
-    code = self.verbatim.rstrip('\n')
     lang = self.hlsettingstack[-1][0]
     linenos = code.count('\n') >= self.hlsettingstack[-1][1] - 1
     fname = node['filename']
@@ -152,9 +155,14 @@ def depart_snippet_latex(self, node):
                                               linenos=linenos,
                                               **highlight_args)
 
-    self.body.append('\n{\\colorbox[rgb]{0.9,0.9,0.9}'
-                     '{\\makebox[\\textwidth][l]'
-                     '{\\small\\texttt{%s}}}}\n' % (fname,))
+    self.body.append(
+        '\n{\\colorbox[rgb]{0.9,0.9,0.9}'
+        '{\\makebox[\\textwidth][l]'
+        '{\\small\\texttt{%s}}}}\n' % (
+            # Some filenames have '_', which is special in latex.
+            fname.replace('_', r'\_'),
+        )
+    )
 
     if self.table:
         hlcode = hlcode.replace('\\begin{Verbatim}',
@@ -166,7 +174,16 @@ def depart_snippet_latex(self, node):
     hlcode = hlcode.rstrip() + '\n'
     self.body.append('\n' + hlcode + '\\end{%sVerbatim}\n' %
                      (self.table and 'Original' or ''))
-    self.verbatim = None
+
+    # Prevent rawsource from appearing in output a second time.
+    raise nodes.SkipNode
+
+
+def depart_snippet_latex(self, node):
+    """
+    Latex document generator depart handler.
+    """
+    pass
 
 
 class SnippetWithFilename(Directive):
@@ -220,7 +237,7 @@ class VersionDirective(Directive):
         return ret
 
 
-class DjangoHTMLTranslator(SmartyPantsHTMLTranslator):
+class DjangoHTMLTranslator(HTMLTranslator):
     """
     Django-specific reST to HTML tweaks.
     """
@@ -241,23 +258,10 @@ class DjangoHTMLTranslator(SmartyPantsHTMLTranslator):
         self.first_param = 1
         self.optional_param_level = 0
         self.param_separator = node.child_text_separator
-        self.required_params_left = sum([isinstance(c, addnodes.desc_parameter)
-                                         for c in node.children])
+        self.required_params_left = sum(isinstance(c, addnodes.desc_parameter) for c in node.children)
 
     def depart_desc_parameterlist(self, node):
         self.body.append(')')
-
-    if sphinx_ver < '1.0.8':
-        #
-        # Don't apply smartypants to literal blocks
-        #
-        def visit_literal_block(self, node):
-            self.no_smarty += 1
-            SmartyPantsHTMLTranslator.visit_literal_block(self, node)
-
-        def depart_literal_block(self, node):
-            SmartyPantsHTMLTranslator.depart_literal_block(self, node)
-            self.no_smarty -= 1
 
     #
     # Turn the "new in version" stuff (versionadded/versionchanged) into a
@@ -269,7 +273,6 @@ class DjangoHTMLTranslator(SmartyPantsHTMLTranslator):
     # that work.
     #
     version_text = {
-        'deprecated': 'Deprecated in Django %s',
         'versionchanged': 'Changed in Django %s',
         'versionadded': 'New in Django %s',
     }
@@ -278,11 +281,13 @@ class DjangoHTMLTranslator(SmartyPantsHTMLTranslator):
         self.body.append(
             self.starttag(node, 'div', CLASS=node['type'])
         )
-        title = "%s%s" % (
-            self.version_text[node['type']] % node['version'],
-            ":" if len(node) else "."
-        )
-        self.body.append('<span class="title">%s</span> ' % title)
+        version_text = self.version_text.get(node['type'])
+        if version_text:
+            title = "%s%s" % (
+                version_text % node['version'],
+                ":" if node else "."
+            )
+            self.body.append('<span class="title">%s</span> ' % title)
 
     def depart_versionmodified(self, node):
         self.body.append("</div>\n")
@@ -292,45 +297,16 @@ class DjangoHTMLTranslator(SmartyPantsHTMLTranslator):
         old_ids = node.get('ids', [])
         node['ids'] = ['s-' + i for i in old_ids]
         node['ids'].extend(old_ids)
-        SmartyPantsHTMLTranslator.visit_section(self, node)
+        super().visit_section(node)
         node['ids'] = old_ids
 
 
 def parse_django_admin_node(env, sig, signode):
     command = sig.split(' ')[0]
-    env._django_curr_admin_command = command
-    title = "django-admin.py %s" % sig
+    env.ref_context['std:program'] = command
+    title = "django-admin %s" % sig
     signode += addnodes.desc_name(title, title)
-    return sig
-
-
-def parse_django_adminopt_node(env, sig, signode):
-    """A copy of sphinx.directives.CmdoptionDesc.parse_signature()"""
-    from sphinx.domains.std import option_desc_re
-    count = 0
-    firstname = ''
-    for m in option_desc_re.finditer(sig):
-        optname, args = m.groups()
-        if count:
-            signode += addnodes.desc_addname(', ', ', ')
-        signode += addnodes.desc_name(optname, optname)
-        signode += addnodes.desc_addname(args, args)
-        if not count:
-            firstname = optname
-        count += 1
-    if not count:
-        for m in simple_option_desc_re.finditer(sig):
-            optname, args = m.groups()
-            if count:
-                signode += addnodes.desc_addname(', ', ', ')
-            signode += addnodes.desc_name(optname, optname)
-            signode += addnodes.desc_addname(args, args)
-            if not count:
-                firstname = optname
-            count += 1
-    if not firstname:
-        raise ValueError
-    return firstname
+    return command
 
 
 class DjangoStandaloneHTMLBuilder(StandaloneHTMLBuilder):
@@ -341,17 +317,188 @@ class DjangoStandaloneHTMLBuilder(StandaloneHTMLBuilder):
     name = 'djangohtml'
 
     def finish(self):
-        super(DjangoStandaloneHTMLBuilder, self).finish()
+        super().finish()
         self.info(bold("writing templatebuiltins.js..."))
         xrefs = self.env.domaindata["std"]["objects"]
         templatebuiltins = {
-            "ttags": [n for ((t, n), (l, a)) in xrefs.items()
-                      if t == "templatetag" and l == "ref/templates/builtins"],
-            "tfilters": [n for ((t, n), (l, a)) in xrefs.items()
-                         if t == "templatefilter" and l == "ref/templates/builtins"],
+            "ttags": [
+                n for ((t, n), (k, a)) in xrefs.items()
+                if t == "templatetag" and k == "ref/templates/builtins"
+            ],
+            "tfilters": [
+                n for ((t, n), (k, a)) in xrefs.items()
+                if t == "templatefilter" and k == "ref/templates/builtins"
+            ],
         }
         outfilename = os.path.join(self.outdir, "templatebuiltins.js")
         with open(outfilename, 'w') as fp:
             fp.write('var django_template_builtins = ')
             json.dump(templatebuiltins, fp)
             fp.write(';\n')
+
+
+class ConsoleNode(nodes.literal_block):
+    """
+    Custom node to override the visit/depart event handlers at registration
+    time. Wrap a literal_block object and defer to it.
+    """
+    def __init__(self, litblk_obj):
+        self.wrapped = litblk_obj
+
+    def __getattr__(self, attr):
+        if attr == 'wrapped':
+            return self.__dict__.wrapped
+        return getattr(self.wrapped, attr)
+
+
+def visit_console_dummy(self, node):
+    """Defer to the corresponding parent's handler."""
+    self.visit_literal_block(node)
+
+
+def depart_console_dummy(self, node):
+    """Defer to the corresponding parent's handler."""
+    self.depart_literal_block(node)
+
+
+def visit_console_html(self, node):
+    """Generate HTML for the console directive."""
+    if self.builder.name in ('djangohtml', 'json') and node['win_console_text']:
+        # Put a mark on the document object signaling the fact the directive
+        # has been used on it.
+        self.document._console_directive_used_flag = True
+        uid = node['uid']
+        self.body.append('''\
+<div class="console-block" id="console-block-%(id)s">
+<input class="c-tab-unix" id="c-tab-%(id)s-unix" type="radio" name="console-%(id)s" checked>
+<label for="c-tab-%(id)s-unix" title="Linux/macOS">&#xf17c/&#xf179</label>
+<input class="c-tab-win" id="c-tab-%(id)s-win" type="radio" name="console-%(id)s">
+<label for="c-tab-%(id)s-win" title="Windows">&#xf17a</label>
+<section class="c-content-unix" id="c-content-%(id)s-unix">\n''' % {'id': uid})
+        try:
+            self.visit_literal_block(node)
+        except nodes.SkipNode:
+            pass
+        self.body.append('</section>\n')
+
+        self.body.append('<section class="c-content-win" id="c-content-%(id)s-win">\n' % {'id': uid})
+        win_text = node['win_console_text']
+        highlight_args = {'force': True}
+        if 'linenos' in node:
+            linenos = node['linenos']
+        else:
+            linenos = win_text.count('\n') >= self.highlightlinenothreshold - 1
+
+        def warner(msg):
+            self.builder.warn(msg, (self.builder.current_docname, node.line))
+
+        highlighted = self.highlighter.highlight_block(
+            win_text, 'doscon', warn=warner, linenos=linenos, **highlight_args
+        )
+        self.body.append(highlighted)
+        self.body.append('</section>\n')
+        self.body.append('</div>\n')
+        raise nodes.SkipNode
+    else:
+        self.visit_literal_block(node)
+
+
+class ConsoleDirective(CodeBlock):
+    """
+    A reStructuredText directive which renders a two-tab code block in which
+    the second tab shows a Windows command line equivalent of the usual
+    Unix-oriented examples.
+    """
+    required_arguments = 0
+    # The 'doscon' Pygments formatter needs a prompt like this. '>' alone
+    # won't do it because then it simply paints the whole command line as a
+    # grey comment with no highlighting at all.
+    WIN_PROMPT = r'...\> '
+
+    def run(self):
+
+        def args_to_win(cmdline):
+            changed = False
+            out = []
+            for token in cmdline.split():
+                if token[:2] == './':
+                    token = token[2:]
+                    changed = True
+                elif token[:2] == '~/':
+                    token = '%HOMEPATH%\\' + token[2:]
+                    changed = True
+                elif token == 'make':
+                    token = 'make.bat'
+                    changed = True
+                if '://' not in token and 'git' not in cmdline:
+                    out.append(token.replace('/', '\\'))
+                    changed = True
+                else:
+                    out.append(token)
+            if changed:
+                return ' '.join(out)
+            return cmdline
+
+        def cmdline_to_win(line):
+            if line.startswith('# '):
+                return 'REM ' + args_to_win(line[2:])
+            if line.startswith('$ # '):
+                return 'REM ' + args_to_win(line[4:])
+            if line.startswith('$ ./manage.py'):
+                return 'manage.py ' + args_to_win(line[13:])
+            if line.startswith('$ manage.py'):
+                return 'manage.py ' + args_to_win(line[11:])
+            if line.startswith('$ ./runtests.py'):
+                return 'runtests.py ' + args_to_win(line[15:])
+            if line.startswith('$ ./'):
+                return args_to_win(line[4:])
+            if line.startswith('$ python'):
+                return 'py ' + args_to_win(line[8:])
+            if line.startswith('$ '):
+                return args_to_win(line[2:])
+            return None
+
+        def code_block_to_win(content):
+            bchanged = False
+            lines = []
+            for line in content:
+                modline = cmdline_to_win(line)
+                if modline is None:
+                    lines.append(line)
+                else:
+                    lines.append(self.WIN_PROMPT + modline)
+                    bchanged = True
+            if bchanged:
+                return ViewList(lines)
+            return None
+
+        env = self.state.document.settings.env
+        self.arguments = ['console']
+        lit_blk_obj = super().run()[0]
+
+        # Only do work when the djangohtml HTML Sphinx builder is being used,
+        # invoke the default behavior for the rest.
+        if env.app.builder.name not in ('djangohtml', 'json'):
+            return [lit_blk_obj]
+
+        lit_blk_obj['uid'] = '%s' % env.new_serialno('console')
+        # Only add the tabbed UI if there is actually a Windows-specific
+        # version of the CLI example.
+        win_content = code_block_to_win(self.content)
+        if win_content is None:
+            lit_blk_obj['win_console_text'] = None
+        else:
+            self.content = win_content
+            lit_blk_obj['win_console_text'] = super().run()[0].rawsource
+
+        # Replace the literal_node object returned by Sphinx's CodeBlock with
+        # the ConsoleNode wrapper.
+        return [ConsoleNode(lit_blk_obj)]
+
+
+def html_page_context_hook(app, pagename, templatename, context, doctree):
+    # Put a bool on the context used to render the template. It's used to
+    # control inclusion of console-tabs.css and activation of the JavaScript.
+    # This way it's include only from HTML files rendered from reST files where
+    # the ConsoleDirective is used.
+    context['include_console_assets'] = getattr(doctree, '_console_directive_used_flag', False)
