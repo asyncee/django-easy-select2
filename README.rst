@@ -7,9 +7,11 @@ in admin.
 
 ---------------
 
+**Important notes**: currently the project is not actively maintained. Pull requests are welcomed.
 
-Project aims to support **3.4**(at least) and above,
-**Django 2.0+**.
+---------------
+
+Project aims to support 3.4+ and Django 2.0+.
 
 Current stable version is **1.4**, dropping support for **python-2.x**.
 
