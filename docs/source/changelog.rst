@@ -1,6 +1,18 @@
 Changelog
 =========
 
+Version 1.5.0
+-------------
+
+.. WARNING::
+
+  Version 1.5.0 major changes, read below.
+
+- Fixed #44 - "mark_safe problem"
+- Support for select2 constructor argument injection, within separate initialization block with for select2.
+- updated easy-select2 wrapper initialization. Updated to JQuery plugin code design for JS code injection,
+  allowing direct injection of select2 constructor arguments.
+
 Version 1.4.0
 -------------
 
