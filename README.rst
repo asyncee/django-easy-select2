@@ -5,11 +5,6 @@ in admin.
 
 |python| |pypi| |travis| |coveralls| |license|
 
----------------
-
-**Important notes**: currently the project is not actively maintained. Pull requests are welcomed.
-
----------------
 
 Project aims to support 3.4+ and Django 2.0+.
 
