@@ -44,11 +44,12 @@ if (window.$ == undefined) {
             // NOTE: obj properties will be overwritten by options
             // https://api.jquery.com/jquery.extend/
             $.extend(obj, options);
-
             redisplay_select2($(this), obj);
-            $("#" + $(this).attr('id')).on('DOMNodeInserted', function(){
-                $(this).select2('destroy').select2(obj);
-            })
+            $(document).bind('DOMNodeInserted', function (e) {
+                $(e.target).find('div.field-easy-select2:not([id*="__prefix__"])').each(function () {
+                    redisplay_select2($(this), obj);
+                });
+            });
         });
     }
 
