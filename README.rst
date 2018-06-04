@@ -26,6 +26,8 @@ please feel free to contribute.
 
 Upgrade notes
 -------------
+Version 1.5.2 introduced. Read more in changelog_.
+
 Version 1.5.1 introduced. Read more in changelog_.
 
 Version 1.5 introduced. Read more in changelog_.

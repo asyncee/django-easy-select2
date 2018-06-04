@@ -45,10 +45,18 @@ if (window.$ == undefined) {
             // https://api.jquery.com/jquery.extend/
             $.extend(obj, options);
             redisplay_select2($(this), obj);
-            $(document).bind('DOMNodeInserted', function (e) {
-                $(e.target).find('div.field-easy-select2:not([id*="__prefix__"])').each(function () {
-                    redisplay_select2($(this), obj);
-                });
+        });
+
+        $(document).bind('DOMNodeInserted', function (e) {
+            $(e.target).find('div.field-easy-select2:not([id*="__prefix__"])').each(function () {
+                // taking data-* for select2 constructor properties for backward compatibility
+                var obj = $(this).data();
+
+                // merging the options and data properties, modifying the first
+                // NOTE: obj properties will be overwritten by options
+                // https://api.jquery.com/jquery.extend/
+                $.extend(obj, options);
+                redisplay_select2($(this), obj);
             });
         });
     }
