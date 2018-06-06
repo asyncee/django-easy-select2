@@ -1,6 +1,16 @@
 Changelog
 =========
 
+Version 1.5.2
+-------------
+
+.. WARNING::
+
+  Version 1.5.2 changes, read below.
+
+- Fixed #45 (remaining bug in v 1.5.0) - 1st record addition fixed for "Doesn't work for dynamically added forms in inline admins"
+- updated easy_select js to handle DomNodeInserted Event for select2() dynamic initialization for all instances
+
 Version 1.5.1
 -------------
 
