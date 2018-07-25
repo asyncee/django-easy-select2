@@ -8,7 +8,7 @@ in admin.
 
 Project aims to support 3.4+ and Django 2.0+.
 
-Current stable version is **1.5.1**.
+Current stable version is **1.5.3**.
 
 For **Django < 2.0** version support or **python-2.x** compatibility, please use version **1.3.4** which is
 the last version to support **python-2.x** compatibility.
@@ -26,6 +26,8 @@ please feel free to contribute.
 
 Upgrade notes
 -------------
+Version 1.5.3 introduced. Read more in changelog_.
+
 Version 1.5.2 introduced. Read more in changelog_.
 
 Version 1.5.1 introduced. Read more in changelog_.
