@@ -1,6 +1,16 @@
 Changelog
 =========
 
+Version 1.5.3
+-------------
+
+.. WARNING::
+
+  Version 1.5.3 changes, read below.
+
+- Fixed #50 (partly remaining bug in v 1.5.2) - 1st record addition fixed for "Doesn't work for dynamically added forms in inline admins"
+- updated easy_select js to fail case when easy-select2.js[line#65]($(e.target).find('div.field-easy-select2:not([id*="__prefix__"])')) is not able to find elements while in DomNodeInserted corresponding to other node insertion than select2 widgets.
+
 Version 1.5.2
 -------------
 
