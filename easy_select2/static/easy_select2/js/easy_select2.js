@@ -85,6 +85,10 @@ if (window.$ == undefined) {
                 });
             }
         };
+
+        $(document).on('formset:added', function (event, $row, formsetName) {
+            updateSelect($row);
+        });
     }
 
     /**
