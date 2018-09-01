@@ -1,4 +1,6 @@
-$(document).ready(function(){
+var _jq = (jQuery || django.jQuery);
+
+_jq(document).ready(function(){
     // easy_select2() can take select2 constructor arguments object
-    $('body').easy_select();
+    _jq('body').easy_select();
 });
