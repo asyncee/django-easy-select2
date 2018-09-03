@@ -59,12 +59,15 @@ if (window.$ == undefined) {
 
         $(document).bind('DOMNodeInserted', function (e) {
             var $changedEle = $(e.target);
-
             if(!$changedEle.parentsUntil('select').length < 1) return;
 
-            var $select2Eles = $(e.target).find('div.field-easy-select2:not([id*="__prefix__"])');
+            updateSelect($changedEle);
+        });
+
+        function updateSelect($changedEle) {
+            var $select2Eles = $changedEle.find('div.field-easy-select2:not([id*="__prefix__"])');
             if($select2Eles.length) {
-                 $(e.target).find('div.field-easy-select2:not([id*="__prefix__"])').each(function () {
+                 $changedEle.find('div.field-easy-select2:not([id*="__prefix__"])').each(function () {
                      // taking data-* for select2 constructor properties for backward compatibility
                     var obj = $(this).data();
                     // merging the options and data properties, modifying the first
@@ -81,6 +84,10 @@ if (window.$ == undefined) {
                     $("#" + val).select2('destroy').select2();
                 });
             }
+        };
+
+        $(document).on('formset:added', function (event, $row, formsetName) {
+            updateSelect($row);
         });
     }
 
