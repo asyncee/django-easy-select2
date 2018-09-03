@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version 1.5.4
+-------------
+- Work with jQuery instead of depending on $, thanks to *leibowitz*
+- Fixed a problem with django admin tabularinline (#52), thanks to *leibowitz*
+
 Version 1.5.3
 -------------
 
