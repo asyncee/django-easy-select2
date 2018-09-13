@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version 1.5.5
+-------------
+- Fixed cascading issue-52 bug
+- Introducing django's Jquery to easy-select2 for accessing django's JQuery
+
 Version 1.5.4
 -------------
 - Work with jQuery instead of depending on $, thanks to *leibowitz*
