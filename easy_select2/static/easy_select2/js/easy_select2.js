@@ -11,7 +11,11 @@ if (window.$ == undefined) {
 }
 
 
-(function ($) {
+/**
+ * $ - external JQuery ref
+ * _djq - django Jquery ref
+ */
+(function ($, _djq) {
     "use strict";
     // store for keeping all the select2 widget ids for fail-safe parsing later
     var _all_easy_select2_ids = [];
@@ -86,7 +90,8 @@ if (window.$ == undefined) {
             }
         };
 
-        $(document).on('formset:added', function (event, $row, formsetName) {
+        // using django.jQuery for accessing django specific events
+        _djq(document).on('formset:added', function (event, $row, formsetName) {
             updateSelect($row);
         });
     }
@@ -99,4 +104,4 @@ if (window.$ == undefined) {
         add_select2_handlers(options);
     };
 
-}(jQuery || django.jQuery));
+}(jQuery || django.jQuery, django.jQuery));
