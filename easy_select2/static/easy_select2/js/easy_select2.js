@@ -25,6 +25,13 @@ if (window.$ == undefined) {
      * @param obj - select2 constructor options
      */
     function redisplay_select2($el, obj){
+        if(!$.fn.select2){
+            if(jQuery.fn.select2){
+                $ = jQuery
+            } else if (_djq.fn.select2) {
+                $ = _djq;
+            }
+        }
         var $selectEle = $("#" + $el.attr('id'));
         if($selectEle.hasClass("select2-hidden-accessible")){
             $selectEle.select2('destroy').select2(obj);
