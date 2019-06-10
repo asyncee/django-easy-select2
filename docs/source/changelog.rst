@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Version 1.5.6
+-------------
+- Fixed #57, thanks to *jaikanthjay46*
+
 Version 1.5.5
 -------------
 - Fixed cascading issue-52 bug
