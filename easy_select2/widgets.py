@@ -27,6 +27,8 @@ SELECT2_WIDGET_JS = [
 if SELECT2_USE_BUNDLED_JQUERY:
     jquery_min_file = 'easy_select2/vendor/jquery/jquery.min.js'
     SELECT2_WIDGET_JS.insert(0, jquery_min_file)
+else:
+    SELECT2_WIDGET_JS.insert(0, 'admin/js/jquery.init.js')
 
 SELECT2_WIDGET_CSS = {
     'screen': [
