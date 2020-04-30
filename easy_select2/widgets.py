@@ -5,36 +5,6 @@ from django import forms
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
-SELECT2_JS = getattr(
-        settings,
-        'SELECT2_JS',
-        'easy_select2/vendor/select2/js/select2.min.js',
-)
-SELECT2_CSS = getattr(
-        settings,
-        'SELECT2_CSS',
-        'easy_select2/vendor/select2/css/select2.min.css',
-)
-SELECT2_USE_BUNDLED_JQUERY = getattr(
-        settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
-
-SELECT2_WIDGET_JS = [
-    'easy_select2/js/init.js',
-    'easy_select2/js/easy_select2.js',
-    SELECT2_JS,
-]
-
-if SELECT2_USE_BUNDLED_JQUERY:
-    jquery_min_file = 'easy_select2/vendor/jquery/jquery.min.js'
-    SELECT2_WIDGET_JS.insert(0, jquery_min_file)
-
-SELECT2_WIDGET_CSS = {
-    'screen': [
-        SELECT2_CSS,
-        'easy_select2/css/easy_select2.css',
-    ],
-}
-
 
 class Select2Mixin(object):
     """
@@ -65,7 +35,41 @@ class Select2Mixin(object):
         )
         if 'width' not in self.select2attrs:
             self.select2attrs.update({'width': '250px'})
+        self.static_settings()
         super(Select2Mixin, self).__init__(*args, **kwargs)
+
+    def static_settings(self):
+        SELECT2_JS = getattr(
+                settings,
+                'SELECT2_JS',
+                'easy_select2/vendor/select2/js/select2.min.js',
+        )
+        SELECT2_CSS = getattr(
+                settings,
+                'SELECT2_CSS',
+                'easy_select2/vendor/select2/css/select2.min.css',
+        )
+        SELECT2_USE_BUNDLED_JQUERY = getattr(
+                settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
+
+        self.SELECT2_WIDGET_JS = [
+            'easy_select2/js/init.js',
+            'easy_select2/js/easy_select2.js',
+            SELECT2_JS,
+        ]
+
+        if SELECT2_USE_BUNDLED_JQUERY:
+            jquery_min_file = 'easy_select2/vendor/jquery/jquery.min.js'
+            self.SELECT2_WIDGET_JS.insert(0, jquery_min_file)
+        else:
+            self.SELECT2_WIDGET_JS.insert(0, 'admin/js/jquery.init.js')
+
+        self.SELECT2_WIDGET_CSS = {
+            'screen': [
+                SELECT2_CSS,
+                'easy_select2/css/easy_select2.css',
+            ],
+        }
 
     # This function is taken from django-select2
     def get_options(self):
@@ -104,9 +108,12 @@ class Select2Mixin(object):
             id_, name, value, attrs=attrs, **kwargs)
         return mark_safe(output)
 
-    class Media:
-        css = SELECT2_WIDGET_CSS
-        js = SELECT2_WIDGET_JS
+    @property
+    def media(self):
+        return forms.Media(
+            css=self.SELECT2_WIDGET_CSS,
+            js=self.SELECT2_WIDGET_JS
+        )
 
 
 class Select2(Select2Mixin, forms.Select):
