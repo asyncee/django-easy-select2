@@ -94,7 +94,7 @@ def test_staticfiles_url(settings):
         )
 
 
-def test_select(settings):
+def test_django_jquery(settings):
     settings.SELECT2_USE_BUNDLED_JQUERY = False
     s = widgets.Select2Mixin()
     assert s.media._js[0] == 'admin/js/jquery.init.js'
