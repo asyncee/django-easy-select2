@@ -75,8 +75,9 @@ def test_select2mixin_render(mocked):
 
 
 def test_staticfiles_url(settings):
-    js = widgets.SELECT2_WIDGET_JS
-    css = widgets.SELECT2_WIDGET_CSS
+    s = widgets.Select2Mixin()
+    js = s.SELECT2_WIDGET_JS
+    css = s.SELECT2_WIDGET_CSS
 
     def all_startswith(string, iterable):
         return all([staticfiles_storage.url(x).startswith(string)
