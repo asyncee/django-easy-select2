@@ -106,9 +106,12 @@ class Select2Mixin(object):
             id_, name, value, attrs=attrs, **kwargs)
         return mark_safe(output)
 
-    class Media:
-        css = SELECT2_WIDGET_CSS
-        js = SELECT2_WIDGET_JS
+    @property
+    def media(self):
+        return forms.Media(
+            css=SELECT2_WIDGET_CSS,
+            js=SELECT2_WIDGET_JS
+        )
 
 
 class Select2(Select2Mixin, forms.Select):
