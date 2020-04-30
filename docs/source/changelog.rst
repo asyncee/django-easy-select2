@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Version 1.5.7
+-------------
+- Merged #64, thanks to *leibowitz*. Fixed situation when widget were not displayed on django 2.2+.
+
 Version 1.5.6
 -------------
 - Fixed #57, thanks to *jaikanthjay46*
