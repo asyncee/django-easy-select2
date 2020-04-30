@@ -76,8 +76,8 @@ def test_select2mixin_render(mocked):
 
 def test_staticfiles_url(settings):
     s = widgets.Select2Mixin()
-    js = s.SELECT2_WIDGET_JS
-    css = s.SELECT2_WIDGET_CSS
+    js = s.media._js
+    css = s.media._css
 
     def all_startswith(string, iterable):
         return all([staticfiles_storage.url(x).startswith(string)
@@ -97,4 +97,4 @@ def test_staticfiles_url(settings):
 def test_select(settings):
     settings.SELECT2_USE_BUNDLED_JQUERY = False
     s = widgets.Select2Mixin()
-    assert s.SELECT2_WIDGET_JS[0] == 'admin/js/jquery.init.js'
+    assert s.media._js[0] == 'admin/js/jquery.init.js'
