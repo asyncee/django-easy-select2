@@ -59,7 +59,7 @@ class Select2Mixin(object):
         ]
 
         if SELECT2_USE_BUNDLED_JQUERY:
-            jquery_min_file = 'easy_select2/vendor/jquery/jquery.min.js'
+            jquery_min_file = 'easy_select2/vendor/jquery/jquery-3.5.1.min.js'
             self.SELECT2_WIDGET_JS.insert(0, jquery_min_file)
         else:
             self.SELECT2_WIDGET_JS.insert(0, 'admin/js/jquery.init.js')
