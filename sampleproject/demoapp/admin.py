@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django import forms
 
 from easy_select2 import select2_modelform
 
