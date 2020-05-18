@@ -4,6 +4,7 @@ Changelog
 Version ?.?.?
 -------------
 - `Select2` updated to 4.0.13 (#65)
+- `jQuery` updated to 3.1.5
 
 Version 1.5.7
 -------------
