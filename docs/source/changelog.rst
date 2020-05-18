@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Version ?.?.?
+-------------
+- `Select2` updated to 4.0.13 (#65)
+
 Version 1.5.7
 -------------
 - Merged #64, thanks to *leibowitz*. Fixed situation when widget were not displayed on django 2.2+.
