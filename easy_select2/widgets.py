@@ -42,12 +42,12 @@ class Select2Mixin(object):
         SELECT2_JS = getattr(
                 settings,
                 'SELECT2_JS',
-                'easy_select2/vendor/select2/js/select2.min.js',
+                'easy_select2/vendor/select2-4.0.13/js/select2.min.js',
         )
         SELECT2_CSS = getattr(
                 settings,
                 'SELECT2_CSS',
-                'easy_select2/vendor/select2/css/select2.min.css',
+                'easy_select2/vendor/select2-4.0.13/css/select2.min.css',
         )
         SELECT2_USE_BUNDLED_JQUERY = getattr(
                 settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
