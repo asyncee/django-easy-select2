@@ -42,12 +42,12 @@ class Select2Mixin(object):
         SELECT2_JS = getattr(
                 settings,
                 'SELECT2_JS',
-                'easy_select2/vendor/select2/js/select2.min.js',
+                'easy_select2/vendor/select2-4.0.13/js/select2.min.js',
         )
         SELECT2_CSS = getattr(
                 settings,
                 'SELECT2_CSS',
-                'easy_select2/vendor/select2/css/select2.min.css',
+                'easy_select2/vendor/select2-4.0.13/css/select2.min.css',
         )
         SELECT2_USE_BUNDLED_JQUERY = getattr(
                 settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
@@ -59,7 +59,7 @@ class Select2Mixin(object):
         ]
 
         if SELECT2_USE_BUNDLED_JQUERY:
-            jquery_min_file = 'easy_select2/vendor/jquery/jquery.min.js'
+            jquery_min_file = 'easy_select2/vendor/jquery/jquery-3.5.1.min.js'
             self.SELECT2_WIDGET_JS.insert(0, jquery_min_file)
         else:
             self.SELECT2_WIDGET_JS.insert(0, 'admin/js/jquery.init.js')
