@@ -19,3 +19,6 @@ settings.py:
 
 - ``SELECT2_USE_BUNDLED_JQUERY`` - default is ``True``. Set to
   ``False`` if you want to use jQuery of Django Admin, instead.
+
+- ``SELECT2_USE_BUNDLED_SELECT2`` - default is ``True``. Set to
+  ``False`` if you want to use Select2 of Django Admin, instead.

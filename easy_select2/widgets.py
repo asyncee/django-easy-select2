@@ -38,15 +38,25 @@ class Select2Mixin(object):
         super(Select2Mixin, self).__init__(*args, **kwargs)
 
     def static_settings(self):
+        SELECT2_USE_BUNDLED_SELECT2 = getattr(
+                settings, 'SELECT2_USE_BUNDLED_SELECT2', True)
+        if SELECT2_USE_BUNDLED_SELECT2:
+            SELECT2_VERSION = '4.0.13'
+            DEFAULT_SELECT2_CSS = 'easy_select2/vendor/select2-{}/css/select2.min.css'.format(SELECT2_VERSION)
+            DEFAULT_SELECT2_JS = 'easy_select2/vendor/select2-{}/js/select2.min.js'.format(SELECT2_VERSION)
+        else:  # use Django admin's copy
+            DEFAULT_SELECT2_CSS = 'admin/css/vendor/select2/select2.min.css'
+            DEFAULT_SELECT2_JS = 'admin/js/vendor/select2/select2.full.min.js'
+
         SELECT2_JS = getattr(
                 settings,
                 'SELECT2_JS',
-                'easy_select2/vendor/select2-4.0.13/js/select2.min.js',
+                DEFAULT_SELECT2_JS,
         )
         SELECT2_CSS = getattr(
                 settings,
                 'SELECT2_CSS',
-                'easy_select2/vendor/select2-4.0.13/css/select2.min.css',
+                DEFAULT_SELECT2_CSS,
         )
         SELECT2_USE_BUNDLED_JQUERY = getattr(
                 settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
