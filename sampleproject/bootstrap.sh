@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+set -e
+
+on_error_exit() {
+    echo "ERROR: Command \"${BASH_COMMAND}\" at ${BASH_SOURCE} line ${BASH_LINENO} failed with exit code $?." >&2
+}
+trap on_error_exit ERR
 
 echo ">>> Removing old environment"
 if [ ! -d env ]; then
