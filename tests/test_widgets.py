@@ -105,3 +105,19 @@ def test_django_jquery__not_bundled(settings):
     settings.SELECT2_USE_BUNDLED_JQUERY = False
     s = widgets.Select2Mixin()
     assert s.media._js[0] == 'admin/js/jquery.init.js'
+
+
+def test_django_select2__bundled(settings):
+    settings.SELECT2_USE_BUNDLED_SELECT2 = True
+    s = widgets.Select2Mixin()
+    assert s.media._css['screen'][0].startswith('easy_select2/vendor/select2-')
+    assert s.media._css['screen'][0].endswith('/css/select2.min.css')
+    assert s.media._js[3].startswith('easy_select2/vendor/select2-')
+    assert s.media._js[3].endswith('/js/select2.min.js')
+
+
+def test_django_select2__not_bundled(settings):
+    settings.SELECT2_USE_BUNDLED_SELECT2 = False
+    s = widgets.Select2Mixin()
+    assert s.media._css['screen'][0] == 'admin/css/vendor/select2/select2.min.css'
+    assert s.media._js[3] == 'admin/js/vendor/select2/select2.full.min.js'
