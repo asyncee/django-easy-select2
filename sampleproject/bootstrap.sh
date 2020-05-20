@@ -14,5 +14,6 @@ if [ ! -d env ]; then
 fi
 echo ">>> Installing django into new virtualenv"
 virtualenv env -p python3
+env/bin/pip install --upgrade pip setuptools wheel
 env/bin/pip install -r requirements.txt
 env/bin/pip install -e ../
