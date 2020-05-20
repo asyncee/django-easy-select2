@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo ">>> Removing old environment"
 if [ ! -d env ]; then
