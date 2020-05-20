@@ -6,6 +6,8 @@ on_error_exit() {
 }
 trap on_error_exit ERR
 
+cd "$(dirname "$0")"
+
 echo ">>> Removing old environment"
 if [ ! -d env ]; then
     rm -rf env
