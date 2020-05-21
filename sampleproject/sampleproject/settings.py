@@ -4,7 +4,6 @@ Settings for sampleproject project.
 
 import os
 
-
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 SECRET_KEY = 'CHANGE_IT_FOR_MORE_SECURITY'
@@ -138,4 +137,4 @@ LOGGING = {
     }
 }
 
-from .local_settings import *  # noqa: F401,E402,F403
+from .local_settings import *  # noqa: F401,E402,F403  # isort:skip

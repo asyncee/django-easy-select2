@@ -3,7 +3,6 @@ from collections import OrderedDict
 import mock
 import pytest
 from django.contrib.staticfiles.storage import staticfiles_storage
-
 from easy_select2 import widgets
 
 
