@@ -1,14 +1,11 @@
 from __future__ import print_function
 
-import pytest
-
 import mock
-from django import forms
-
-from easy_select2 import forms as es2_forms
-from easy_select2 import utils
-from easy_select2 import widgets
+import pytest
 from demoapp import models as m
+from django import forms
+from easy_select2 import forms as es2_forms
+from easy_select2 import utils, widgets
 
 
 def test_apply_select2():
