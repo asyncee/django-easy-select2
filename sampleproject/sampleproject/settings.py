@@ -40,15 +40,15 @@ ROOT_URLCONF = 'sampleproject.urls'
 
 WSGI_APPLICATION = 'sampleproject.wsgi.application'
 
-#LANGUAGE_CODE = 'ru-RU'
+# LANGUAGE_CODE = 'ru-RU'
 
-#TIME_ZONE = 'Europe/Moscow'
+# TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
 USE_L10N = True
 
-#FIRST_DAY_OF_WEEK = 1
+# FIRST_DAY_OF_WEEK = 1
 
 USE_TZ = False
 
@@ -138,4 +138,4 @@ LOGGING = {
     }
 }
 
-from .local_settings import *
+from .local_settings import *  # noqa: F401,E402,F403

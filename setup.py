@@ -20,19 +20,22 @@ if root_dir:
 for dirpath, dirnames, filenames in os.walk('easy_select2'):
     # Ignore dirnames that start with '.'
     for i, dirname in enumerate(dirnames):
-        if dirname.startswith('.'): del dirnames[i]
+        if dirname.startswith('.'):
+            del dirnames[i]
     if filenames:
-        prefix = dirpath[13:] # Strip "easy_select2/" or "easy_select2\"
+        prefix = dirpath[13:]  # Strip "easy_select2/" or "easy_select2\"
         for f in filenames:
             data_files.append(os.path.join(prefix, f))
+
 
 class Tox(TestCommand):
     def finalize_options(self):
         TestCommand.finalize_options(self)
         self.test_args = []
         self.test_suite = True
+
     def run_tests(self):
-        #import here, cause outside the eggs aren't loaded
+        # import here, cause outside the eggs aren't loaded
         import tox
         errcode = tox.cmdline(self.test_args)
         sys.exit(errcode)
