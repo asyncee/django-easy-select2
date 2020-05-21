@@ -10,5 +10,3 @@ Utils
 -----
 .. automodule:: easy_select2.utils
    :members:
-
-
