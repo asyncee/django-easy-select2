@@ -18,4 +18,7 @@ settings.py:
   Default: ``easy_select2/vendor/select2/select2.min.css``
 
 - ``SELECT2_USE_BUNDLED_JQUERY`` - default is ``True``. Set to
-  ``False`` if your already have included custom jQuery.
+  ``False`` if you want to use jQuery of Django Admin, instead.
+
+- ``SELECT2_USE_BUNDLED_SELECT2`` - default is ``True``. Set to
+  ``False`` if you want to use Select2 of Django Admin, instead.

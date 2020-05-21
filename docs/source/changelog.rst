@@ -3,6 +3,8 @@ Changelog
 
 Version ?.?.?
 -------------
+- Introduce setting ``SELECT2_USE_BUNDLED_SELECT2``.
+  Default is ``True``, set to ``False`` if you want to use Select2 of Django Admin.
 - `Select2` updated to 4.0.13 (#65)
 - `jQuery` updated to 3.1.5
 
