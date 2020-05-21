@@ -95,7 +95,7 @@ def test_select2_modelform():
     form_class = utils.select2_modelform(m.TestFieldsModel)
     assert form_class.__name__ == 'TestFieldsModelForm'
     assert issubclass(form_class, forms.ModelForm)
-    assert hasattr(form_class, 'Meta') == True
+    assert hasattr(form_class, 'Meta')
 
 
 @pytest.mark.django_db

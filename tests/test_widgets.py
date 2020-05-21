@@ -13,7 +13,7 @@ def test_select2mixin_constructor():
     assert s.select2attrs['width'] == '250px'
 
     s1 = widgets.Select2Mixin(select2attrs={'auto': True})
-    assert s1.select2attrs['auto'] == True
+    assert s1.select2attrs['auto'] is True
 
     with pytest.raises(AssertionError):
         widgets.Select2Mixin(select2attrs="wrong value")
