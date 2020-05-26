@@ -4,7 +4,6 @@ Settings for sampleproject project.
 
 import os
 
-
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 SECRET_KEY = 'CHANGE_IT_FOR_MORE_SECURITY'
@@ -40,15 +39,15 @@ ROOT_URLCONF = 'sampleproject.urls'
 
 WSGI_APPLICATION = 'sampleproject.wsgi.application'
 
-#LANGUAGE_CODE = 'ru-RU'
+# LANGUAGE_CODE = 'ru-RU'
 
-#TIME_ZONE = 'Europe/Moscow'
+# TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
 USE_L10N = True
 
-#FIRST_DAY_OF_WEEK = 1
+# FIRST_DAY_OF_WEEK = 1
 
 USE_TZ = False
 
@@ -138,4 +137,4 @@ LOGGING = {
     }
 }
 
-from .local_settings import *
+from .local_settings import *  # noqa: F401,E402,F403  # isort:skip

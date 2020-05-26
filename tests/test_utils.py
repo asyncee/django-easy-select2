@@ -1,14 +1,11 @@
 from __future__ import print_function
 
-import pytest
-
 import mock
-from django import forms
-
-from easy_select2 import forms as es2_forms
-from easy_select2 import utils
-from easy_select2 import widgets
+import pytest
 from demoapp import models as m
+from django import forms
+from easy_select2 import forms as es2_forms
+from easy_select2 import utils, widgets
 
 
 def test_apply_select2():
@@ -95,7 +92,7 @@ def test_select2_modelform():
     form_class = utils.select2_modelform(m.TestFieldsModel)
     assert form_class.__name__ == 'TestFieldsModelForm'
     assert issubclass(form_class, forms.ModelForm)
-    assert hasattr(form_class, 'Meta') == True
+    assert hasattr(form_class, 'Meta')
 
 
 @pytest.mark.django_db

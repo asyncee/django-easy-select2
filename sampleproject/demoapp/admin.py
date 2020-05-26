@@ -1,8 +1,7 @@
 from django.contrib import admin
-
 from easy_select2 import select2_modelform
 
-from .models import Note, Category
+from .models import Category, Note
 
 
 class NoteAdmin(admin.ModelAdmin):
