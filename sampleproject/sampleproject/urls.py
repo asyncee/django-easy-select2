@@ -1,10 +1,10 @@
+from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
-from django.conf import settings
+from django.contrib import admin
 from django.urls.base import reverse_lazy
 from django.views.generic.base import RedirectView
 
-from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
