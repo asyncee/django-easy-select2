@@ -55,7 +55,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -136,5 +135,7 @@ LOGGING = {
         },
     }
 }
+
+SELECT2_USE_BUNDLED_JQUERY = False
 
 from .local_settings import *  # noqa: F401,E402,F403  # isort:skip
