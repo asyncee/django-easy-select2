@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+</head>
+<body>
+    <h1>Notes</h1>
+    <p>
+        Welcome to this little demo of <em>django-easy-select2</em>!
+    </p>
+
+    <h2>Existing Notes</h2>
+    {% if note_list %}
+        <ul>
+        {% for note in note_list %}
+            <li><a href="{% url 'note-edit' pk=note.pk %}">{{ note }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <em>none</em>
+    {% endif %}
+
+    <h2>What do you want to do?</h2>
+    <ul>
+        <li><a href="{% url 'note-create' %}">Create a new Note</a></li>
+        <li><a href="{% url 'admin:demoapp_category_changelist' %}">Manage Categories in Django Admin</a></li>
+        <li><a href="{% url 'admin:demoapp_note_changelist' %}">Manage Notes in Django Admin</a></li>
+    </ul>
+</body>
+</html>
