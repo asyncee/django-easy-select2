@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if form.instance.pk %}Edit {{ form.instance }}{% else %}Create Note{% endif%}</title>
+    {{ form.media.css }}
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+    {{ form.media.js }}
+</head>
+<body>
+    <h1>{% if form.instance.pk %}Edit {{ form.instance }}{% else %}Create Note{% endif%}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{% if form.instance.pk %}Save{% else %}Create{% endif%}">
+    </form>
+</body>
+</html>
