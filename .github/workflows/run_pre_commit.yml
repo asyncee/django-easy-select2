@@ -21,6 +21,7 @@ jobs:
 
       - name: Install pre-commit
         run: |-
+          set -e
           pip install \
             --disable-pip-version-check \
             --user \
