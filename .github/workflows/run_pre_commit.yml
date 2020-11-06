@@ -26,7 +26,7 @@ jobs:
             --user \
             --no-warn-script-location \
             pre-commit
-          echo "::set-env name=PATH::${HOME}/.local/bin:${PATH}"
+          echo "PATH=${HOME}/.local/bin:${PATH}" >> "${GITHUB_ENV}"
 
       - name: Install pre-commit hooks
         run: |-
