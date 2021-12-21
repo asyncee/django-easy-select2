@@ -3,7 +3,7 @@ in admin.
 
 ---------------
 
-|python| |pypi| |travis| |coveralls| |license|
+|python| |pypi| |github-actions| |coveralls| |license|
 
 
 Project aims to support 3.4+ and Django 2.0+.
@@ -79,9 +79,9 @@ You can read more in the documentation_.
     :target: https://pypi.python.org/pypi/django-easy-select2
     :alt: pypi
 
-.. |travis| image:: https://img.shields.io/travis/asyncee/django-easy-select2.svg?style=flat-square
-    :target: https://travis-ci.org/asyncee/django-easy-select2
-    :alt: Travis Build
+.. |github-actions| image:: https://github.com/asyncee/django-easy-select2/actions/workflows/run_tox.yml/badge.svg
+    :target: https://github.com/asyncee/django-easy-select2/actions/workflows/run_tox.yml
+    :alt: GitHub Action "Run tox"
 
 .. |coveralls| image:: https://img.shields.io/coveralls/asyncee/django-easy-select2.svg?style=flat-square
     :target: https://coveralls.io/r/asyncee/django-easy-select2
