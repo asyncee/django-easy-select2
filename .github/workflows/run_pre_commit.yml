@@ -4,8 +4,10 @@
 name: Run pre-commit on all files
 
 on:
-- pull_request
-- push
+  pull_request:
+  push:
+  schedule:
+    - cron: '0 16 * * 5'  # Every Friday at 16:00
 
 jobs:
   run_pre_commit:
