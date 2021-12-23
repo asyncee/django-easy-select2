@@ -1,0 +1,49 @@
+# Copyright (C) 2021 Sebastian Pipping <sebastian@pipping.org>
+# Licensed under the MIT license
+
+name: Run tox
+
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: '0 16 * * 5'  # Every Friday at 16:00
+
+jobs:
+  run_tox:
+    name: Run tox
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8  # includes tox env about code coverage
+          - 3.9
+          - '3.10'
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2.3.1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install tox
+        run: |-
+          pip install \
+            --disable-pip-version-check \
+            --user \
+            --no-warn-script-location \
+            tox
+          echo "PATH=${HOME}/.local/bin:${PATH}" >> "${GITHUB_ENV}"
+
+      - name: Run tox (environments matching Python ${{ matrix.python-version }})
+        run: |-
+          set -x
+          python_version_without_dot="$(sed 's,\.,,' <<< "${{ matrix.python-version }}")"
+          function join_by { local IFS="$1"; shift; echo "$*"; }
+          tox_envs=( $(tox --listenvs | fgrep "py${python_version_without_dot}-") )
+          tox -e "$(join_by ',' "${tox_envs[@]}")"
