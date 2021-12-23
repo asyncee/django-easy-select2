@@ -17,8 +17,8 @@ jobs:
       matrix:
         python-version:
           - 3.7  # oldest supported version
-          - 3.8
-          - 3.9
+        # - 3.8  # no particial need
+        # - 3.9  # no particial need
           - '3.10'  # includes tox env about code coverage
 
     steps:
