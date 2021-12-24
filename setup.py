@@ -51,6 +51,12 @@ setup(
     keywords="django select2",
     url='https://github.com/asyncee/django-easy-select2',
     download_url='https://pypi.python.org/pypi/django-easy-select2/',
+
+    python_requires='>=3.7',
+    install_requires=[
+        'Django>=2.2',
+    ],
+
     classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',

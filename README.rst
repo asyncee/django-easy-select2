@@ -6,10 +6,13 @@ in admin.
 |python| |pypi| |github-actions| |coveralls| |license|
 
 
-Project aims to support 3.4+ and Django 2.0+.
+Project aims to support Python 3.7+ and Django 2.2+.
 
 For **Django < 2.0** version support or **python-2.x** compatibility, please use version **1.3.4** which is
 the last version to support **python-2.x** compatibility.
+
+For **Django 2.0/2.1** version support or **Python 3.5/3.6** compatibility, please use version **1.5.7** which is
+the last version to support **Django 2.0/2.1** and **Python 3.5/3.6** compatibility.
 
 This django library is just a lightweight wrapper on `Select2` library
 and provides easy-to-use basic select2 functionality in a django project.
