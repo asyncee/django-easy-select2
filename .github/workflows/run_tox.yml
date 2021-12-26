@@ -46,6 +46,4 @@ jobs:
           tox_envs=( $(tox --listenvs | fgrep "py${python_version_without_dot}-") )
           tox -e "$(join_by ',' "${tox_envs[@]}")"
         env:
-          # NOTE: For related docs see
-          #       https://github.com/marketplace/actions/coveralls-github-action#inputs
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
