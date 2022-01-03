@@ -3,10 +3,52 @@ Changelog
 
 Version ?.?.?
 -------------
-- Introduce setting ``SELECT2_USE_BUNDLED_SELECT2``.
+
+Bugs Fixed
+~~~~~~~~~~
+
+- ``setup.py``: Drop leftover classifiers (`#98 <https://github.com/asyncee/django-easy-select2/pull/98>`_)
+
+
+Version 1.5.8
+-------------
+
+Bugs Fixed
+~~~~~~~~~~
+
+- ``setup.py``: Stop installing package ``tests`` (`#85 <https://github.com/asyncee/django-easy-select2/pull/85>`_)
+- Added Django 4.0 support (`#86 <https://github.com/asyncee/django-easy-select2/issues/86>`_, `#87 <https://github.com/asyncee/django-easy-select2/issues/87>`_, `#88 <https://github.com/asyncee/django-easy-select2/pull/88>`_)
+
+
+Enhancements
+~~~~~~~~~~~~
+
+- Update bundled Select2 to 4.0.13 (`#65 <https://github.com/asyncee/django-easy-select2/issues/65>`_, `#67 <https://github.com/asyncee/django-easy-select2/pull/67>`_)
+- Update bundled jQuery to 3.1.5 (`#67 <https://github.com/asyncee/django-easy-select2/pull/67>`_)
+- Activate support for Python 3.8 (`#69 <https://github.com/asyncee/django-easy-select2/pull/69>`_)
+- Drop dummy files of little value (`#70 <https://github.com/asyncee/django-easy-select2/pull/70>`_)
+- Remove unused imports (`#72 <https://github.com/asyncee/django-easy-select2/pull/72>`_)
+- Improve sample project (`#73 <https://github.com/asyncee/django-easy-select2/pull/73>`_)
+- Support using Select2 assets of Django Admin (`#74 <https://github.com/asyncee/django-easy-select2/pull/74>`_);
+  this introduces a a new setting ``SELECT2_USE_BUNDLED_SELECT2``.
   Default is ``True``, set to ``False`` if you want to use Select2 of Django Admin.
-- `Select2` updated to 4.0.13 (#65)
-- `jQuery` updated to 3.1.5
+- Demo use outside of Django Admin (`#76 <https://github.com/asyncee/django-easy-select2/pull/76>`_)
+- Bump Django from 2.2.10 to 2.2.25 in ``/sampleproject`` (`#91 <https://github.com/asyncee/django-easy-select2/pull/91>`_)
+- Drop end-of-life Django 2.0/2.1/3.0 and Python 3.5/3.6 (`#94 <https://github.com/asyncee/django-easy-select2/issues/94>`_, `#95 <https://github.com/asyncee/django-easy-select2/pull/95>`_)
+
+
+Infrastructure
+~~~~~~~~~~~~~~
+
+- Introduce pre-commit (`#75 <https://github.com/asyncee/django-easy-select2/pull/75>`_)
+- Actions: Get off deprecated ``::set-env`` (`#78 <https://github.com/asyncee/django-easy-select2/pull/78>`_)
+- Actions: Make GitHub Dependabot keep our GitHub Actions up to date (`#89 <https://github.com/asyncee/django-easy-select2/pull/89>`_)
+- Actions: Bump actions/setup-python from 1.1.1 to 2.3.1 (`#90 <https://github.com/asyncee/django-easy-select2/pull/90>`_)
+- Improve pre-commit GitHub Action + enable cron mode (`#92 <https://github.com/asyncee/django-easy-select2/pull/92>`_)
+- Execute tox on GitHub Actions rather than Travis CI (`#93 <https://github.com/asyncee/django-easy-select2/pull/93>`_)
+- Actions: Restore coveralls (`#96 <https://github.com/asyncee/django-easy-select2/pull/96>`_)
+- coveralls: Stop using discouraged ``--service=github`` (`#97 <https://github.com/asyncee/django-easy-select2/pull/97>`_)
+
 
 Version 1.5.7
 -------------
