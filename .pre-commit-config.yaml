@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Sebastian Pipping <sebastian@pipping.org>
+# Copyright (C) 2020-2022 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under the MIT license
 
 repos:
@@ -18,7 +18,7 @@ repos:
         args: ['--show-source']
         exclude: '^(docs/source/|sampleproject/demoapp/migrations/)'
 
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v4.3.21
+  - repo: https://github.com/pycqa/isort
+    rev: 4.3.21
     hooks:
       - id: isort
