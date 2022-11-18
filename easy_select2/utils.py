@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from django.db.models import ForeignKey
+
 from easy_select2 import forms as es2_forms
 from easy_select2.widgets import Select2, Select2Mixin, Select2Multiple
 
