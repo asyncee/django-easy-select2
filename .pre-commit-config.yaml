@@ -11,7 +11,7 @@ repos:
         exclude: '^easy_select2/static/easy_select2/vendor/'
       - id: trailing-whitespace
 
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/PyCQA/flake8
     rev: 3.8.1
     hooks:
       - id: flake8
