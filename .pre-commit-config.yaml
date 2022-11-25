@@ -3,7 +3,7 @@
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.1.0
+    rev: v4.3.0
     hooks:
       - id: check-yaml
       - id: check-merge-conflict
@@ -11,14 +11,14 @@ repos:
         exclude: '^easy_select2/static/easy_select2/vendor/'
       - id: trailing-whitespace
 
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.8.1
+  - repo: https://github.com/PyCQA/flake8
+    rev: 5.0.4
     hooks:
       - id: flake8
         args: ['--show-source']
         exclude: '^(docs/source/|sampleproject/demoapp/migrations/)'
 
   - repo: https://github.com/pycqa/isort
-    rev: 4.3.21
+    rev: 5.10.1
     hooks:
       - id: isort

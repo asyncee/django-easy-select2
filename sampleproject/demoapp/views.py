@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView
 from django.views.generic.edit import CreateView
+
 from easy_select2 import select2_modelform
 
 from .models import Note

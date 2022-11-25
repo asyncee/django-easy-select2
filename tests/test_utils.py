@@ -4,6 +4,7 @@ import mock
 import pytest
 from demoapp import models as m
 from django import forms
+
 from easy_select2 import forms as es2_forms
 from easy_select2 import utils, widgets
 
