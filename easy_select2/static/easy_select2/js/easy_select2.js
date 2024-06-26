@@ -1,3 +1,16 @@
+//const { editDistance } = require('./levenshtein-search/levenshtein-search');
+
+// Check if the external library is loaded
+if (typeof editDistance !== 'undefined') {
+    // Attach functions to the window object
+    window.editDistance = editDistance;
+    // Add other functions if needed
+    // window.otherFunction = levenshtein.otherFunction;
+} else {
+    console.error('Levenshtein-search library not loaded');
+}
+
+
 var _jq = (jQuery || django.jQuery)
 
 // We need this exports because Select2 needs window.jQuery
@@ -30,6 +43,9 @@ if (window.$ == undefined) {
             console.log('There is no text here');
           return null;
         }
+
+        const distance = editDistance(data.text, params.term);
+        console.log(`Distance between ${data.text} and ${params.term} is ${distance}`);
 
         // `params.term` should be the term that is used for searching
         // `data.text` is the text that is displayed for the data object
