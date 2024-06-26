@@ -1,12 +1,23 @@
 // https://github.com/taleinat/levenshtein-search/blob/master/levenshtein-search.js#L36
+const editDistanceCache = new Map();
+
+function getCacheKey(a, b) {
+  // JavaScript doesn't support the use of arrays as keys, so we need a string.
+  return `${a}∪${b}`;
+}
+
 function editDistance (a, b) {
   if (!a || !b) {
     return Infinity;
   }
+  cacheKey = getCacheKey(a,b);
+  if (editDistanceCache[cacheKey] !== undefined) {
+    return editDistanceCache[cacheKey];
+  }
+
   if (a.length > b.length) {
     [a, b] = [b, a]
   }
-  console.log(`Getting the distance between ${a} and ${b}`);
   const scores = new Array(a.length + 1)
   for (let i = 0; i <= a.length; i++) {
     scores[i] = i
@@ -28,8 +39,8 @@ function editDistance (a, b) {
     }
   }
   const result = scores[a.length]
-  console.log(`The distance between ${a} and ${b} is ${result}`);
-  return scores[a.length]
+  editDistanceCache[cacheKey] = result;
+  return result;
 }
 
 // Check if the external library is loaded
@@ -55,6 +66,9 @@ if (window.$ == undefined) {
     window.$ = _jq;
 }
 
+// The edit distance will be biased towards shorter strings, so we need to strengthen the effect of an actual match
+const PHRASE_MULTIPLIER = 0.6;
+
 /**
  * $ - external JQuery ref
  * _djq - django Jquery ref
@@ -64,18 +78,18 @@ if (window.$ == undefined) {
     // store for keeping all the select2 widget ids for fail-safe parsing later
     var _all_easy_select2_ids = [];
     var recentSearchTerm;
-    var recentScore;
 
     function relaxedMatcher(params, data) {
-        recentSearchTerm = params.term;
+
         // If there are no search terms, return all of the data
         if ($.trim(params.term) === '') {
+          recentSearchTerm = '';
           return data;
         }
+        recentSearchTerm = params.term.toLowerCase();
 
         // Do not display the item if there is no 'text' property
         if (typeof data.text === 'undefined') {
-          console.log('There is no text here');
           return null;
         }
 
@@ -87,12 +101,19 @@ if (window.$ == undefined) {
         // https://stackoverflow.com/a/32106792/1495729
         // We need to make a copy
         var sorted = results.slice(0);
-        // Todo: Owen, there are too many results being kept, so everything is too slow. At the moment, the scores are
-        //  biased by shorter results. Need to boost scores by phrase matches, then eventually cut off the bad results.
 
-        // Array.sort is an in-place sort
         sorted.sort(function (first, second) {
-            return editDistance(first.text, recentSearchTerm) - editDistance(second.text, recentSearchTerm);
+            const normalizedFirst = first.text.toLowerCase();
+            var distanceFirst = editDistance(normalizedFirst, recentSearchTerm);
+            if (normalizedFirst.indexOf(recentSearchTerm) >= 0) {
+                distanceFirst = distanceFirst * PHRASE_MULTIPLIER;
+            }
+            const normalizedSecond = second.text.toLowerCase()
+            var distanceSecond = editDistance(normalizedSecond, recentSearchTerm);
+            if (normalizedSecond.indexOf(recentSearchTerm) >= 0) {
+                distanceSecond = distanceSecond * PHRASE_MULTIPLIER;
+            }
+            return distanceFirst - distanceSecond;
         });
 
         return sorted;
@@ -104,7 +125,6 @@ if (window.$ == undefined) {
      * @param obj - select2 constructor options
      */
     function redisplay_select2($el, obj){
-        // todo: override the `matcher` argument: https://stackoverflow.com/a/24741027/1495729
         if(!$.fn.select2){
             if(jQuery.fn.select2){
                 $ = jQuery
@@ -113,7 +133,6 @@ if (window.$ == undefined) {
             }
         }
         var $selectEle = $("#" + $el.attr('id'));
-        console.log("Current HTML options for " + $el.attr('id') + ":", $selectEle.html());
 
         if (obj.use_custom_matcher) {
             obj.matcher = relaxedMatcher;
@@ -121,10 +140,8 @@ if (window.$ == undefined) {
         }
 
         if($selectEle.hasClass("select2-hidden-accessible")){
-            console.log("Re-initializing element");
             $selectEle.select2('destroy').select2(obj);
         } else{
-            console.log("Initializing element");
             $selectEle.select2(obj);
         }
         $selectEle.change(function (e) {
