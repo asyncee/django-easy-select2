@@ -64,9 +64,6 @@ class Select2Mixin(object):
                 settings, 'SELECT2_USE_BUNDLED_JQUERY', True)
 
         self.SELECT2_WIDGET_JS = [
-            'easy_select2/js/levenshtein-search/index.js',
-            'easy_select2/js/levenshtein-search/levenshtein-search.js',
-            'easy_select2/js/levenshtein-search/utils.js',
             'easy_select2/js/init.js',
             'easy_select2/js/easy_select2.js',
             SELECT2_JS,

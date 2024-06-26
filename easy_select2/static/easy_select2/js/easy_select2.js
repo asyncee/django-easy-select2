@@ -1,4 +1,36 @@
-//const { editDistance } = require('./levenshtein-search/levenshtein-search');
+// https://github.com/taleinat/levenshtein-search/blob/master/levenshtein-search.js#L36
+function editDistance (a, b) {
+  if (!a || !b) {
+    return Infinity;
+  }
+  if (a.length > b.length) {
+    [a, b] = [b, a]
+  }
+  console.log(`Getting the distance between ${a} and ${b}`);
+  const scores = new Array(a.length + 1)
+  for (let i = 0; i <= a.length; i++) {
+    scores[i] = i
+  }
+
+  let _prevScore
+  let prevScore
+  for (let i = 0; i < b.length; i++) {
+    scores[0] = i + 1
+    prevScore = i
+    for (let k = 0; k < a.length; k++) {
+      _prevScore = scores[k + 1]
+      scores[k + 1] = Math.min(
+        prevScore + +(a[k] !== b[i]),
+        scores[k] + 1,
+        scores[k + 1] + 1
+      )
+      prevScore = _prevScore
+    }
+  }
+  const result = scores[a.length]
+  console.log(`The distance between ${a} and ${b} is ${result}`);
+  return scores[a.length]
+}
 
 // Check if the external library is loaded
 if (typeof editDistance !== 'undefined') {
@@ -31,8 +63,11 @@ if (window.$ == undefined) {
     "use strict";
     // store for keeping all the select2 widget ids for fail-safe parsing later
     var _all_easy_select2_ids = [];
-    function myMatcher(params, data) {
-        console.log("Running custom matcher");
+    var recentSearchTerm;
+    var recentScore;
+
+    function relaxedMatcher(params, data) {
+        recentSearchTerm = params.term;
         // If there are no search terms, return all of the data
         if ($.trim(params.term) === '') {
           return data;
@@ -40,27 +75,29 @@ if (window.$ == undefined) {
 
         // Do not display the item if there is no 'text' property
         if (typeof data.text === 'undefined') {
-            console.log('There is no text here');
+          console.log('There is no text here');
           return null;
         }
 
-        const distance = editDistance(data.text, params.term);
-        console.log(`Distance between ${data.text} and ${params.term} is ${distance}`);
-
-        // `params.term` should be the term that is used for searching
-        // `data.text` is the text that is displayed for the data object
-        if (data.text.indexOf(params.term) > -1) {
-          var modifiedData = $.extend({}, data, true);
-          modifiedData.text += ' (matched)';
-
-          // You can return modified objects from here
-          // This includes matching the `children` how you want in nested data sets
-          return modifiedData;
-        }
-
-        // Return `null` if the term should not be displayed
-        return null;
+        var modifiedData = $.extend({}, data, true);
+        return modifiedData;
     }
+
+    function sortByEditDistance(results) {
+        // https://stackoverflow.com/a/32106792/1495729
+        // We need to make a copy
+        var sorted = results.slice(0);
+        // Todo: Owen, there are too many results being kept, so everything is too slow. At the moment, the scores are
+        //  biased by shorter results. Need to boost scores by phrase matches, then eventually cut off the bad results.
+
+        // Array.sort is an in-place sort
+        sorted.sort(function (first, second) {
+            return editDistance(first.text, recentSearchTerm) - editDistance(second.text, recentSearchTerm);
+        });
+
+        return sorted;
+    }
+
     /**
      * passing the current element to initialize and the options to initialize with
      * @param $el - Jquery object to initialize with select2
@@ -79,7 +116,8 @@ if (window.$ == undefined) {
         console.log("Current HTML options for " + $el.attr('id') + ":", $selectEle.html());
 
         if (obj.use_custom_matcher) {
-            obj.matcher = myMatcher;
+            obj.matcher = relaxedMatcher;
+            obj.sorter = sortByEditDistance;
         }
 
         if($selectEle.hasClass("select2-hidden-accessible")){
