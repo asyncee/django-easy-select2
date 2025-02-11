@@ -6,7 +6,7 @@ in admin.
 |python| |pypi| |github-actions| |coveralls| |license|
 
 
-Project aims to support Python 3.7+ and Django 2.2+.
+Project aims to support Python 3.9+ and Django 2.2+.
 
 For **Django < 2.0** version support or **python-2.x** compatibility, please use version **1.3.4** which is
 the last version to support **python-2.x** compatibility.
